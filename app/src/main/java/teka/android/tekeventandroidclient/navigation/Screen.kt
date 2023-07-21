@@ -8,8 +8,8 @@ const val To_MAIN_GRAPH_ROUTE = "to_main_graph_route"
 
 sealed class Screen(val route: String) {
     object WelcomeScreen : Screen(route = "welcome_screen")
-    object HomeScreen : Screen(route = "home_screen")
-    object LoginScreen: Screen(route = "login_screen")
-    object VisitorRegistrationScreen: Screen(route = "visitor_registration_screen")
+    object AttendeeScreen : Screen(route = "attendee_screen")
+    object SendSmsScreen: Screen(route = "sens_sms_screen")
+    object GuestRegistrationScreen: Screen(route = "guest_registration_screen")
     object DashboardScreen: Screen(route = "dashboard_screen")
 }

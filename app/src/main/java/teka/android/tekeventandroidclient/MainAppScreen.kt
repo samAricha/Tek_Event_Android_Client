@@ -22,12 +22,14 @@ import teka.android.tekeventandroidclient.navigation.Screen
 @Composable
 fun MainAppScreen() {
     val navHostController: NavHostController = rememberNavController()
+
+
     Scaffold(
         topBar = {
             TopAppBar(backgroundColor = Color.Green,
                 title = {
                     Text(
-                        text = "Organiks",
+                        text = "TekEvent",
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         color = Color.White
@@ -41,9 +43,9 @@ fun MainAppScreen() {
                 val currentRoute = navBackStackEntry?.destination?.route
 
                 BottomNavigationItem(
-                    selected = currentRoute == Screen.HomeScreen.route,
+                    selected = currentRoute == Screen.AttendeeScreen.route,
                     onClick = {
-                        navHostController.navigate(Screen.HomeScreen.route) {
+                        navHostController.navigate(Screen.AttendeeScreen.route) {
                             launchSingleTop = true
                         }
                     },
@@ -59,36 +61,36 @@ fun MainAppScreen() {
                 )
 
                 BottomNavigationItem(
-                    selected = currentRoute == Screen.VisitorRegistrationScreen.route,
+                    selected = currentRoute == Screen.GuestRegistrationScreen.route,
                     onClick = {
-                        navHostController.navigate(Screen.VisitorRegistrationScreen.route) {
+                        navHostController.navigate(Screen.GuestRegistrationScreen.route) {
                             launchSingleTop = true
                         }
                     },
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.edit_note),
-                            contentDescription = "Records"
+                            contentDescription = "Record"
                         )
                     },
                     label = {
-                        Text(text = "Records")
+                        Text(text = "Record")
                     }
                 )
 
                 BottomNavigationItem(
-                    selected = currentRoute?.startsWith(Screen.DashboardScreen.route) == true,
+                    selected = currentRoute?.startsWith(Screen.AttendeeScreen.route) == true,
                     onClick = {
-                        navHostController.navigate(route = Screen.DashboardScreen.route)
+                        navHostController.navigate(route = Screen.AttendeeScreen.route)
                     },
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.dashboard),
-                            contentDescription = "Add Record"
+                            contentDescription = "Dashboard"
                         )
                     },
                     label = {
-                        Text(text = "Add Record")
+                        Text(text = "Dashboard")
                     }
                 )
             }

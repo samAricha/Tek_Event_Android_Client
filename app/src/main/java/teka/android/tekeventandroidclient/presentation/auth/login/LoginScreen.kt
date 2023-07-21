@@ -85,7 +85,6 @@ fun LoginScreen(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = "Log In with Email",
-                            color = LightTextColor,
 //                            fontFamily = Poppins,
                             fontSize = 12.sp,
                             modifier = Modifier.padding(top = 16.dp)
@@ -202,7 +201,6 @@ fun LoginScreen(
                         ) {
                             Text(
                                 text = "Forgot Password ?",
-                                color = LightTextColor,
                                 fontFamily = Poppins,
                                 fontSize = 12.sp,
                                 modifier = Modifier.padding(top = 26.dp)
@@ -214,7 +212,6 @@ fun LoginScreen(
                         ) {
                             Text(
                                 text = "Don't have an Account ? Sign Up",
-                                color = LightTextColor,
                                 fontFamily = Poppins,
                                 fontSize = 12.sp,
                             )

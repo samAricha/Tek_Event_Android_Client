@@ -4,9 +4,10 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,11 +18,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import teka.android.tekeventandroidclient.R
+import teka.android.tekeventandroidclient.presentation.sendSms.SmsViewModel
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun GuestRegistrationScreen() {
+
+    val viewModel: GuestRegistrationViewModel = viewModel()
     val guestNameState = mutableStateOf("")
     val phoneNumberState = mutableStateOf("")
 
@@ -44,8 +50,8 @@ fun GuestRegistrationScreen() {
 
         // Guest Name TextField
         TextField(
-            value = guestNameState.value,
-            onValueChange = { guestNameState.value = it },
+            value = viewModel.guestName,
+            onValueChange = { viewModel.guestName = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp),
@@ -55,7 +61,6 @@ fun GuestRegistrationScreen() {
             textStyle = TextStyle(color = Color.Black),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.LightGray,
                 cursorColor = Color.Black,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
@@ -64,8 +69,8 @@ fun GuestRegistrationScreen() {
 
         // Phone Number TextField
         TextField(
-            value = phoneNumberState.value,
-            onValueChange = { phoneNumberState.value = it },
+            value = viewModel.phoneNumber,
+            onValueChange = { viewModel.phoneNumber = it },
             modifier = Modifier.fillMaxWidth(),
             label = {
                 Text(text = "Phone Number")
@@ -73,11 +78,26 @@ fun GuestRegistrationScreen() {
             textStyle = TextStyle(color = Color.Black),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.LightGray,
                 cursorColor = Color.Black,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             )
         )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+
+        Button(
+            onClick = { viewModel.saveGuest()
+//                navController.navigate(Screen.Recipients.route)
+            }
+        ) {
+            Text(
+                text = "Save GUest",
+                modifier = Modifier.padding(10.dp),
+                color = Color.White,
+                fontSize = 15.sp
+            )
+        }
     }
 }

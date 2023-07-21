@@ -13,7 +13,7 @@ fun NavGraphBuilder.authNavGraph(
     navController: NavHostController
 ){
 
-    navigation(
+ /*   navigation(
         startDestination = Screen.LoginScreen.route,
         route = AUTH_GRAPH_ROUTE
     ){
@@ -33,5 +33,5 @@ fun NavGraphBuilder.authNavGraph(
 
 
 
-    }
+    }*/
 }

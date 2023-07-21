@@ -17,3 +17,6 @@ val SecondaryVariant = Color(0x99E94B3C) // Semi-transparent Persimmon Orange
 val BackgroundColor = Color(0xFFFFFFFF) // White: Clean and allows for versatility.
 val OnPrimary = Color(0xFFFFFFFF) // White text on Primary Color
 val OnSecondary = Color(0xFF4A4C4B) // Charcoal Gray text on Secondary Color
+
+
+val greenColor = Color(0xFF0F9D58)

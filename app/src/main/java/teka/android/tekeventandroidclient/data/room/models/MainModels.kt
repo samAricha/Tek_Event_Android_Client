@@ -20,7 +20,6 @@ data class EventVisitor(
 ) {
     companion object {
         private fun generateUniqueId(): String {
-            // Use UUID for generating a unique ID
             return UUID.randomUUID().toString()
         }
     }
