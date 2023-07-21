@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
@@ -20,6 +21,7 @@ class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDa
 
 
     val allVisitors: Flow<List<EventVisitor>> = eventVisitorDao.getAllEventVisitors()
+        .map { it.reversed() }
         .flowOn(Dispatchers.IO)
 
     var phoneNumber by mutableStateOf("")
