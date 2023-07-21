@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
@@ -15,6 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDao: EventVisitorDao): ViewModel() {
+
+
+    val allVisitors: Flow<List<EventVisitor>> = eventVisitorDao.getAllEventVisitors()
+        .flowOn(Dispatchers.IO)
 
     var phoneNumber by mutableStateOf("")
     var guestName by mutableStateOf("")
