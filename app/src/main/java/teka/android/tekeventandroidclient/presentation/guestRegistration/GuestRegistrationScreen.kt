@@ -21,12 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import teka.android.tekeventandroidclient.R
+import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.presentation.sendSms.SmsViewModel
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun GuestRegistrationScreen() {
+fun GuestRegistrationScreen(navController: NavHostController) {
 
     val viewModel: GuestRegistrationViewModel = hiltViewModel()
     val guestNameState = mutableStateOf("")
@@ -90,7 +92,7 @@ fun GuestRegistrationScreen() {
 
         Button(
             onClick = { viewModel.saveGuest()
-//                navController.navigate(Screen.Recipients.route)
+                navController.navigate(Screen.AttendeeScreen.route)
             }
         ) {
             Text(

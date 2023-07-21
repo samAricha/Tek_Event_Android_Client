@@ -24,7 +24,7 @@ fun MainNavGraph(
         }
 
         composable(route = Screen.GuestRegistrationScreen.route) {
-            GuestRegistrationScreen()
+            GuestRegistrationScreen(navController = navController)
         }
 
         composable(route = Screen.AttendeeScreen.route) {
