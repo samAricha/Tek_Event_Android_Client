@@ -19,6 +19,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.presentation.sendSms.SmsViewModel
@@ -27,7 +28,7 @@ import teka.android.tekeventandroidclient.presentation.sendSms.SmsViewModel
 @Composable
 fun GuestRegistrationScreen() {
 
-    val viewModel: GuestRegistrationViewModel = viewModel()
+    val viewModel: GuestRegistrationViewModel = hiltViewModel()
     val guestNameState = mutableStateOf("")
     val phoneNumberState = mutableStateOf("")
 

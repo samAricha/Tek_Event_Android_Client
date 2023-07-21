@@ -8,12 +8,12 @@ import java.util.*
 @Entity(tableName = "event_visitors")
 data class EventVisitor(
     @ColumnInfo(name = "event_visitor_id")
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val uuid: String = generateUniqueId(),
-    val fist_name: String,
-    val second_name: String,
-    val email: String,
+    val first_name: String,
+    val second_name: String? = null,
+    val email: String? = null,
     val phone: String,
     var isBackedUp: Boolean = false,
     val createdAt: Long = System.currentTimeMillis()

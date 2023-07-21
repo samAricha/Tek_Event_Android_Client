@@ -26,7 +26,7 @@ fun MainAppScreen() {
 
     Scaffold(
         topBar = {
-            TopAppBar(backgroundColor = Color.Green,
+            TopAppBar(
                 title = {
                     Text(
                         text = "TekEvent",

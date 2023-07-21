@@ -6,16 +6,14 @@ import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 
 @Dao
 interface EventVisitorDao{
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(eventVisitor: EventVisitor)
+    suspend fun insertVisitor(eventVisitor: EventVisitor)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(eventVisitor: EventVisitor)
 
     @Delete
     suspend fun delete(eventVisitor: EventVisitor)
-
 
     @Query("SELECT * FROM event_visitors")
     fun getAllEventVisitors(): Flow<List<EventVisitor>>
