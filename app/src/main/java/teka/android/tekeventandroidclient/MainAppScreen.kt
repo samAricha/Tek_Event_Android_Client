@@ -77,11 +77,25 @@ fun MainAppScreen() {
                         Text(text = "Record")
                     }
                 )
-
                 BottomNavigationItem(
-                    selected = currentRoute?.startsWith(Screen.AttendeeScreen.route) == true,
+                    selected = currentRoute?.startsWith(Screen.SendSmsScreen.route) == true,
                     onClick = {
-                        navHostController.navigate(route = Screen.AttendeeScreen.route)
+                        navHostController.navigate(route = Screen.SendSmsScreen.route)
+                    },
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.baseline_sms_24),
+                            contentDescription = "SMS"
+                        )
+                    },
+                    label = {
+                        Text(text = "SMS")
+                    }
+                )
+                BottomNavigationItem(
+                    selected = currentRoute?.startsWith(Screen.SendSmsScreen.route) == true,
+                    onClick = {
+                        navHostController.navigate(route = Screen.SendSmsScreen.route)
                     },
                     icon = {
                         Icon(

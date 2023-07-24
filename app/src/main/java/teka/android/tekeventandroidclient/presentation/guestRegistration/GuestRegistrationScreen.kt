@@ -37,13 +37,13 @@ fun GuestRegistrationScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(start = 16.dp, end = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         // Organization Logo
         Image(
-            painter = painterResource(id = R.drawable.teka),
+            painter = painterResource(id = R.drawable.event),
             contentDescription = "Organization Logo",
             modifier = Modifier
                 .size(200.dp)
@@ -51,7 +51,10 @@ fun GuestRegistrationScreen(navController: NavHostController) {
             contentScale = ContentScale.Fit
         )
 
-        // Guest Name TextField
+        Spacer(modifier = Modifier.height(30.dp))
+
+
+
         TextField(
             value = viewModel.guestName,
             onValueChange = { viewModel.guestName = it },
@@ -67,10 +70,12 @@ fun GuestRegistrationScreen(navController: NavHostController) {
                 cursorColor = Color.Black,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
-            )
+            ),
+            singleLine = true
         )
 
-        // Phone Number TextField
+        Spacer(modifier = Modifier.height(20.dp))
+
         TextField(
             value = viewModel.phoneNumber,
             onValueChange = { viewModel.phoneNumber = it },
@@ -84,7 +89,8 @@ fun GuestRegistrationScreen(navController: NavHostController) {
                 cursorColor = Color.Black,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
-            )
+            ),
+            singleLine = true
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -96,7 +102,7 @@ fun GuestRegistrationScreen(navController: NavHostController) {
             }
         ) {
             Text(
-                text = "Save GUest",
+                text = "Save Guest",
                 modifier = Modifier.padding(10.dp),
                 color = Color.White,
                 fontSize = 15.sp
