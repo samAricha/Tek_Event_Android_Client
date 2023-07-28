@@ -16,4 +16,7 @@ class Repository(
 
     }
 
+    suspend fun saveRemotevisitorList(){
+        //get all event visitors from remote and save them locally
+    }
 }
