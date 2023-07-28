@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import teka.android.tekeventandroidclient.presentation.attendees.AttendeesScreen
+import teka.android.tekeventandroidclient.presentation.dashboard.DashboardScreen
 import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationScreen
 import teka.android.tekeventandroidclient.presentation.sendSms.SendSmsScreen
 
@@ -29,6 +30,10 @@ fun MainNavGraph(
 
         composable(route = Screen.SendSmsScreen.route) {
             SendSmsScreen(navController = navController)
+        }
+
+        composable(route = Screen.DashboardScreen.route) {
+            DashboardScreen()
         }
 
     }

@@ -93,9 +93,9 @@ fun MainAppScreen() {
                     }
                 )
                 BottomNavigationItem(
-                    selected = currentRoute?.startsWith(Screen.SendSmsScreen.route) == true,
+                    selected = currentRoute?.startsWith(Screen.DashboardScreen.route) == true,
                     onClick = {
-                        navHostController.navigate(route = Screen.SendSmsScreen.route)
+                        navHostController.navigate(route = Screen.DashboardScreen.route)
                     },
                     icon = {
                         Icon(

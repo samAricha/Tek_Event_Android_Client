@@ -47,7 +47,6 @@ fun SendSmsScreen(
     ) {
         Text(
             text = "Compose your Message",
-            color = greenColor,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
@@ -65,7 +64,6 @@ fun SendSmsScreen(
 //        )
 
 
-        // Organization Logo
         Image(
             painter = painterResource(id = R.drawable.sms),
             contentDescription = "Sms Logo",
