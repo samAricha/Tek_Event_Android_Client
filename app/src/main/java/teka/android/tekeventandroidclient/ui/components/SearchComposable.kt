@@ -63,8 +63,6 @@ fun SearchComposable(onSearch: (query: String) -> Unit) {
         )
 
         Spacer(modifier = Modifier.height(8.dp))
-
-        // Display your search results below (for example, a LazyColumn for a list of results)
     }
 }
 

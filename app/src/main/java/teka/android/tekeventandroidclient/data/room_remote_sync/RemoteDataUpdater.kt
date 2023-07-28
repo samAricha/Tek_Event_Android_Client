@@ -2,7 +2,7 @@ package teka.android.tekeventandroidclient.data.room_remote_sync
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import teka.android.tekeventandroidclient.data.network.RemoteTekEventApiService
+import teka.android.tekeventandroidclient.data.remote.retrofit.RetrofitProvider
 import teka.android.tekeventandroidclient.repository.Repository
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 
@@ -13,7 +13,7 @@ class RemoteDataUpdater {
         withContext(Dispatchers.IO) {
             try {
                 eventvisitors.forEach { eventVisitor ->
-                    val response = RemoteTekEventApiService.remoteTekEventApiService?.updateEventVisitorList(eventVisitor)
+                    val response = RetrofitProvider.createVisitorListService().updateEventVisitorList(eventVisitor)
                     if (response != null) {
                         if (response.success){
                             eventVisitor.isBackedUp = true

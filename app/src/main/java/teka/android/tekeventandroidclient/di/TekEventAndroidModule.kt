@@ -23,11 +23,6 @@ object TekEventAndroidModule {
         return appContext
     }
 
-
-//    @Provides
-//    @Singleton
-//    fun provideSmsSender(@ApplicationContext context: Context): SmsSender = AppSmsSender(context)
-
     @Provides
     @Singleton
     fun provideSmsSender(appSmsSender: AppSmsSender): SmsSender {

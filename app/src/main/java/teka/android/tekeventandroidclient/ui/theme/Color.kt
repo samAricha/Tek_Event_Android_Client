@@ -10,13 +10,13 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-val PrimaryColor = Color(0xFF4A4C4B) // Charcoal Gray: Sophisticated and versatile.
-val PrimaryVariant = Color(0x994A4C4B) // Semi-transparent Charcoal Gray
-val SecondaryColor = Color(0xFFE94B3C) // Persimmon Orange: Energizing and attention-grabbing.
-val SecondaryVariant = Color(0x99E94B3C) // Semi-transparent Persimmon Orange
-val BackgroundColor = Color(0xFFFFFFFF) // White: Clean and allows for versatility.
-val OnPrimary = Color(0xFFFFFFFF) // White text on Primary Color
-val OnSecondary = Color(0xFF4A4C4B) // Charcoal Gray text on Secondary Color
+val PrimaryColor = Color(0xFFE95757) // Vibrant Red: Passion, excitement, and energy.
+val PrimaryVariant = Color(0x99E95757) // Semi-transparent Vibrant Red for overlays and hover states.
+val SecondaryColor = Color(0xFFF2D1D1) // Light Vibrant Red: A tint of the vibrant red for backgrounds and subtle elements.
+val SecondaryVariant = Color(0x99F2D1D1) // Semi-transparent Light Vibrant Red.
+val BackgroundColor = Color(0xFFFFFFFF) // White: Provides a neutral backdrop allowing the vibrant red to stand out.
+val OnPrimary = Color(0xFFFFFFFF) // White text on Primary Vibrant Red for optimum readability.
+val OnSecondary = Color(0xFFE95757) // Vibrant Red text on Light Vibrant Red for subtle contrast.
 
 
 val greenColor = Color(0xFF0F9D58)
