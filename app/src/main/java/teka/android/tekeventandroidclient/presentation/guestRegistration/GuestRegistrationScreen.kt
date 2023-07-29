@@ -53,8 +53,6 @@ fun GuestRegistrationScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(30.dp))
 
-
-
         TextField(
             value = viewModel.guestName,
             onValueChange = { viewModel.guestName = it },

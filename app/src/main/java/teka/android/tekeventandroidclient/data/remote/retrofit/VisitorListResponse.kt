@@ -1,6 +1,7 @@
 package teka.android.tekeventandroidclient.data.remote.retrofit
 
 import kotlinx.serialization.Serializable
+import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 
 @Serializable
 data class VisitorListResponse(
@@ -12,18 +13,17 @@ data class VisitorListResponse(
 
 @Serializable
 data class VisitorListResult(
-    val adult: Boolean,
-    val backdrop_path: String,
-    val genre_ids: List<Int>,
-    val id: Int,
-    val original_language: String,
-    val original_title: String,
-    val overview: String,
-    val popularity: Double,
-    val poster_path: String,
-    val release_date: String,
-    val title: String,
-    val video: Boolean,
-    val vote_average: Double,
-    val vote_count: Int
+    val first_name: String,
+    val second_name: String,
+    val email: String,
+    val phone: Int,
 )
+
+fun VisitorListResult.toEventVisitor(): EventVisitor {
+    return EventVisitor(
+        first_name = this.first_name,
+        second_name = this.second_name,
+        email = this.email,
+        phone = this.phone.toString(),
+    )
+}

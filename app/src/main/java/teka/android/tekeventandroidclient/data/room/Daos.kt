@@ -9,6 +9,9 @@ interface EventVisitorDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertVisitor(eventVisitor: EventVisitor)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertVisitors(eventVisitors: List<EventVisitor>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(eventVisitor: EventVisitor)
 

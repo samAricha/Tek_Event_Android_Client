@@ -17,6 +17,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import teka.android.tekeventandroidclient.navigation.MainNavGraph
 import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -38,9 +39,18 @@ fun MainAppScreen() {
         },
 
         bottomBar = {
-            BottomNavigation {
+            BottomNavigation(
+                backgroundColor = Color.White,
+                elevation = 16.dp
+            ) {
                 val navBackStackEntry by navHostController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
+
+                fun getIconTint(selected: Boolean): Color = if (selected) {
+                    PrimaryColor
+                } else {
+                    Color.Black
+                }
 
                 BottomNavigationItem(
                     selected = currentRoute == Screen.AttendeeScreen.route,
@@ -52,11 +62,15 @@ fun MainAppScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.home),
-                            contentDescription = "Home"
+                            contentDescription = "Home",
+                            tint = getIconTint(currentRoute == Screen.AttendeeScreen.route)
                         )
                     },
                     label = {
-                        Text(text = "Home")
+                        Text(
+                            text = "Home",
+                            color = getIconTint(currentRoute == Screen.AttendeeScreen.route)
+                        )
                     }
                 )
 
@@ -70,11 +84,15 @@ fun MainAppScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.edit_note),
-                            contentDescription = "Record"
+                            contentDescription = "Record",
+                            tint = getIconTint(currentRoute == Screen.GuestRegistrationScreen.route)
                         )
                     },
                     label = {
-                        Text(text = "Record")
+                        Text(
+                            text = "Record",
+                            color = getIconTint(currentRoute == Screen.GuestRegistrationScreen.route)
+                        )
                     }
                 )
                 BottomNavigationItem(
@@ -85,11 +103,15 @@ fun MainAppScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.baseline_sms_24),
-                            contentDescription = "SMS"
+                            contentDescription = "SMS",
+                            tint = getIconTint(currentRoute == Screen.SendSmsScreen.route)
                         )
                     },
                     label = {
-                        Text(text = "SMS")
+                        Text(
+                            text = "SMS",
+                            color = getIconTint(currentRoute == Screen.SendSmsScreen.route)
+                        )
                     }
                 )
                 BottomNavigationItem(
@@ -100,11 +122,16 @@ fun MainAppScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.dashboard),
-                            contentDescription = "Dashboard"
+                            contentDescription = "Dashboard",
+                            tint = getIconTint(currentRoute == Screen.DashboardScreen.route)
                         )
                     },
                     label = {
-                        Text(text = "Dashboard")
+                        Text(
+                            text = "Dashboard",
+                            color = getIconTint(currentRoute == Screen.DashboardScreen.route)
+                        )
+
                     }
                 )
             }

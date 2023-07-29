@@ -11,12 +11,10 @@ class Repository(
     val getAllEventVisitors = eventVisitorDao.getAllEventVisitors()
 
     suspend fun updatevisitorsList(eventVisitor: EventVisitor){
-
         eventVisitorDao.update(eventVisitor = eventVisitor)
-
     }
 
-    suspend fun saveRemotevisitorList(){
-        //get all event visitors from remote and save them locally
+    suspend fun saveRemotevisitorList(visitors: List<EventVisitor>){
+        eventVisitorDao.insertVisitors(visitors)
     }
 }

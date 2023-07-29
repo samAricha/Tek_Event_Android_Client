@@ -10,7 +10,7 @@ import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 class RemoteDataUpdater {
     //this class is responsible for taking local data to remote
 
-    suspend fun updateEventVisitorsData(eventvisitors: List<EventVisitor>, repository: Repository) {
+    suspend fun updateEventVisitorsDataLocally(eventvisitors: List<EventVisitor>, repository: Repository) {
         withContext(Dispatchers.IO) {
             try {
                 eventvisitors.forEach { eventVisitor ->

@@ -21,10 +21,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
+import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationViewModel
@@ -41,6 +43,17 @@ fun DashboardScreen(){
         .collectAsState(initial = emptyList())
 
     Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                // Define your action for adding a visitor here
+                // For example, navigate to another composable/screen or show a dialog
+            }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.cloud_download),
+                    contentDescription = "Download Contacts"
+                )
+            }
+        }
 
     ) {
         Column(

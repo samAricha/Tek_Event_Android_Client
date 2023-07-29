@@ -24,11 +24,12 @@ class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDa
         .map { it.reversed() }
         .flowOn(Dispatchers.IO)
 
+
+
     var phoneNumber by mutableStateOf("")
     var guestName by mutableStateOf("")
 
     fun saveGuest() {
-
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val visitor = EventVisitor(first_name =  guestName, phone = phoneNumber)
