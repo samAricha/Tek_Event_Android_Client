@@ -24,4 +24,7 @@ interface EventVisitorDao{
     @Query("SELECT * FROM event_visitors WHERE event_visitor_id=:visitorId")
     fun getEventVisitorsById(visitorId:Int): Flow<EventVisitor>
 
+    @Query("UPDATE event_visitors SET attended = NOT attended WHERE uuid = :visitorId")
+    suspend fun toggleArrival(visitorId: Int)
+
 }

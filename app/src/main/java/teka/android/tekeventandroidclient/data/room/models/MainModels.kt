@@ -15,6 +15,7 @@ data class EventVisitor(
     val second_name: String? = null,
     val email: String? = null,
     val phone: String,
+    val attended: Boolean = false,
     var isBackedUp: Boolean = false,
     val createdAt: Long = System.currentTimeMillis()
 ) {

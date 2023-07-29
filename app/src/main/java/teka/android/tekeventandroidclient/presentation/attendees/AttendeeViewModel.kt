@@ -1,6 +1,7 @@
 package teka.android.tekeventandroidclient.presentation.attendees
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import javax.inject.Inject
@@ -36,5 +38,11 @@ class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVi
 
     fun onSearchQueryChanged(query: String) {
         searchQuery.value = query
+    }
+
+    fun toggleArrivalStatus(visitorId: Int) {
+        viewModelScope.launch {
+            eventVisitorDao.toggleArrival(visitorId)
+        }
     }
 }
