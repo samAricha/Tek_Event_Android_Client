@@ -28,7 +28,8 @@ class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVi
         } else {
             visitors.filter {
                 it.first_name.contains(query, true) ||
-                        (it.second_name?.contains(query, true) ?: false)
+                        (it.second_name?.contains(query, true) ?: false) ||
+                        (it.phone?.contains(query, true) ?: false)
             }
         }
     }.flowOn(Dispatchers.IO)
