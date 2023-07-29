@@ -97,11 +97,11 @@ fun VisitorsList(eventVisitors: List<EventVisitor>) {
     ) {
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-
         ) {
             items(eventVisitors) { visitor ->
                 VisitorItem(
-                    visitor = visitor)
+                    visitor = visitor
+                )
             }
         }
     }
@@ -123,17 +123,15 @@ fun VisitorItem(visitor: EventVisitor) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Visitor Avatar
             Icon(
                 Icons.Default.Person,
                 contentDescription = "Visitor Avatar",
                 modifier = Modifier.size(30.dp),
-//                tint = if (visitor.attended) Color.Green else Color.Gray
             )
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            // Visitor Details
+
             Column(
                 verticalArrangement = Arrangement.Center
             ) {
@@ -141,13 +139,16 @@ fun VisitorItem(visitor: EventVisitor) {
                 Text(text = "Phone: ${visitor.phone}")
             }
 
-            IconButton(onClick = {
-            }) {
-                Icon(
-                    Icons.Default.Check,
-                    contentDescription = "Mark as Arrived",
-                    tint = if (visitor.attended) Color.Green else Color.Gray
-                )
+            if (visitor.attended) {
+                IconButton(onClick = {
+                    // Handle click action here if needed
+                }) {
+                    Icon(
+                        Icons.Default.Check,
+                        contentDescription = "Mark as Arrived",
+                        tint = Color.Green
+                    )
+                }
             }
         }
     }

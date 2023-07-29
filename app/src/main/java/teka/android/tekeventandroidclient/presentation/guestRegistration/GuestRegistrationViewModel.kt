@@ -1,5 +1,6 @@
 package teka.android.tekeventandroidclient.presentation.guestRegistration
 
+import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,12 +15,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
+import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
 import javax.inject.Inject
 
 @HiltViewModel
-class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDao: EventVisitorDao): ViewModel() {
+class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDao: EventVisitorDao, private val application: Application): ViewModel() {
 
-
+    private val appSmsSender = AppSmsSender(application)
     val allVisitors: Flow<List<EventVisitor>> = eventVisitorDao.getAllEventVisitors()
         .map { it.reversed() }
         .flowOn(Dispatchers.IO)
@@ -34,6 +36,7 @@ class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDa
             withContext(Dispatchers.IO) {
                 val visitor = EventVisitor(first_name =  guestName, phone = phoneNumber)
                 eventVisitorDao.insertVisitor(visitor)
+                appSmsSender.sendSms("+254708392326", "Hi $guestName welcome to TekEvent")
             }
         }
 
