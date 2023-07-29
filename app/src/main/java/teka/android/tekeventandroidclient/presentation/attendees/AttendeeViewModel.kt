@@ -1,5 +1,6 @@
 package teka.android.tekeventandroidclient.presentation.attendees
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,13 +13,15 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
+import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
 import javax.inject.Inject
 
 @HiltViewModel
-class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVisitorDao): ViewModel() {
+class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVisitorDao, private val application: Application): ViewModel() {
 
     // Flow for search query
     private val searchQuery = MutableStateFlow("")
+    private val appSmsSender = AppSmsSender(application)
 
     // A combined flow of all visitors and search query
     val filteredVisitors: Flow<List<EventVisitor>> = combine(
@@ -40,9 +43,11 @@ class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVi
         searchQuery.value = query
     }
 
-    fun toggleArrivalStatus(visitorId: Int) {
+    fun toggleArrivalStatus(visitorId: Int, visitorName: String) {
         viewModelScope.launch {
-            eventVisitorDao.toggleArrival(visitorId) // Implement this in your DAO
+            eventVisitorDao.toggleArrival(visitorId)
+            appSmsSender.sendSms("+254708392326", "Hi $visitorName welcome to TekEvent")
+
         }
     }
 }

@@ -19,18 +19,16 @@ import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
 import javax.inject.Inject
 
 @HiltViewModel
-class SmsViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
+class SmsViewModel @Inject constructor(private val application: Application) : AndroidViewModel(application) {
     var phoneNumber by mutableStateOf("")
     var message by mutableStateOf("")
-    @SuppressLint("StaticFieldLeak")
-    val appContext: Context = getApplication<Application>().applicationContext
 
-    private val appSmsSender = AppSmsSender(appContext)
+    private val appSmsSender = AppSmsSender(application)
 
     fun sendMessage() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                appSmsSender.sendSms(phoneNumber, message)
+                appSmsSender.sendSms("+254708392326", message)
             } catch (e: Exception) {
                 Log.e("MessageSendingError", "Failed to send messages: ${e.message}", e)
             }

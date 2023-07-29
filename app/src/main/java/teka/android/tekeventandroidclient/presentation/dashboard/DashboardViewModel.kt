@@ -1,18 +1,24 @@
 package teka.android.tekeventandroidclient.presentation.dashboard
 
+import android.annotation.SuppressLint
+import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.data.room_remote_sync.FetchRemoteData
 import teka.android.tekeventandroidclient.repository.Repository
+import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
 import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(private val repository: Repository): ViewModel() {
 
     private val fetchRemoteData = FetchRemoteData()
+
 
     fun getRemoteDataAndSaveLocally() {
         viewModelScope.launch {

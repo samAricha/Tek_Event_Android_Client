@@ -134,7 +134,7 @@ fun VisitorItem(visitor: EventVisitor, attendeeViewModel: AttendeeViewModel) {
             }
 
             IconButton(onClick = {
-                attendeeViewModel.toggleArrivalStatus(visitor.id)
+                attendeeViewModel.toggleArrivalStatus(visitor.id, visitor.first_name)
             }) {
                 Icon(
                     Icons.Default.Check,
