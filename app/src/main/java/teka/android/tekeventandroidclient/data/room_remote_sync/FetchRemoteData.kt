@@ -3,7 +3,6 @@ package teka.android.tekeventandroidclient.data.room_remote_sync
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import teka.android.tekeventandroidclient.data.remote.retrofit.RetrofitProvider
-import teka.android.tekeventandroidclient.data.remote.retrofit.VisitorListResult
 import teka.android.tekeventandroidclient.data.remote.retrofit.toEventVisitor
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import teka.android.tekeventandroidclient.repository.Repository
