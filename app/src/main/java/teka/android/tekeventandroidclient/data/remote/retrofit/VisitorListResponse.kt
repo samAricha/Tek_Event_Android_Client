@@ -5,7 +5,7 @@ import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 
 @Serializable
 data class VisitorListResponse(
-    val page: Int,
+    val page: Int? = null,
     val results: List<VisitorListResult>,
     val total_pages: Int,
     val total_results: Int
@@ -13,10 +13,11 @@ data class VisitorListResponse(
 
 @Serializable
 data class VisitorListResult(
+    val page: Int? = null,
     val first_name: String,
     val second_name: String,
     val email: String,
-    val phone: Int,
+    val phone: String,
 )
 
 fun VisitorListResult.toEventVisitor(): EventVisitor {
@@ -24,6 +25,6 @@ fun VisitorListResult.toEventVisitor(): EventVisitor {
         first_name = this.first_name,
         second_name = this.second_name,
         email = this.email,
-        phone = this.phone.toString(),
+        phone = this.phone,
     )
 }

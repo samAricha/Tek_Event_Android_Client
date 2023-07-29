@@ -1,6 +1,7 @@
 package teka.android.tekeventandroidclient.presentation.dashboard
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -36,6 +38,8 @@ import teka.android.tekeventandroidclient.ui.components.SearchComposable
 @Composable
 fun DashboardScreen(){
 
+    val context = LocalContext.current
+
     val guestRegistrationViewModel: GuestRegistrationViewModel = hiltViewModel();
     val dashboardViewModel: DashboardViewModel = hiltViewModel();
 
@@ -46,6 +50,7 @@ fun DashboardScreen(){
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
+                Toast.makeText(context, "Fetching data...", Toast.LENGTH_SHORT).show()
                 dashboardViewModel.getRemoteDataAndSaveLocally()
             }) {
                 Icon(

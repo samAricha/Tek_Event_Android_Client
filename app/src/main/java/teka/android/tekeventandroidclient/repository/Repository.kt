@@ -2,9 +2,10 @@ package teka.android.tekeventandroidclient.repository
 
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
+import javax.inject.Inject
 
 
-class Repository(
+class Repository @Inject constructor(
     private val eventVisitorDao: EventVisitorDao,
 ) {
     //the following are methods which are going to help us get our data.

@@ -8,13 +8,16 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 object RetrofitProvider {
-    private const val BASE_URL = "https://api.themoviedb.org"
+//    private const val BASE_URL = "https://api.themoviedb.org"
+    private const val BASE_URL = "https://3b3c-105-161-154-198.ngrok-free.app/"
 
     private fun provide(): Retrofit {
+        val json = Json { ignoreUnknownKeys = true }//to ignore unkown keys
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(provideOkhttpClient())
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 
