@@ -33,13 +33,10 @@ import teka.android.tekeventandroidclient.ui.components.SearchComposable
 @Composable
 fun AttendeesScreen(){
 
-    val guestRegistrationViewModel: GuestRegistrationViewModel = hiltViewModel();
+    val attendeeViewModel: AttendeeViewModel = hiltViewModel();
 
-    val visitorsState by guestRegistrationViewModel.allVisitors
-        .flowOn(Dispatchers.Main)
+    val filteredVisitorsState by attendeeViewModel.filteredVisitors
         .collectAsState(initial = emptyList())
-
-    var searchQuery by remember { mutableStateOf("") }
 
 
     Scaffold(
@@ -61,9 +58,10 @@ fun AttendeesScreen(){
                 style = MaterialTheme.typography.h6
             )
             SearchComposable { query ->
-                searchQuery = query
+                attendeeViewModel.onSearchQueryChanged(query)
             }
-            VisitorsList(eventVisitors = visitorsState)
+
+            VisitorsList(eventVisitors = filteredVisitorsState)
         }
     }
 
