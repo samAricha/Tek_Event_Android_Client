@@ -37,6 +37,7 @@ import teka.android.tekeventandroidclient.ui.components.SearchComposable
 fun DashboardScreen(){
 
     val guestRegistrationViewModel: GuestRegistrationViewModel = hiltViewModel();
+    val dashboardViewModel: DashboardViewModel = hiltViewModel();
 
     val visitorsState by guestRegistrationViewModel.allVisitors
         .flowOn(Dispatchers.Main)
@@ -45,8 +46,7 @@ fun DashboardScreen(){
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                // Define your action for adding a visitor here
-                // For example, navigate to another composable/screen or show a dialog
+                dashboardViewModel.getRemoteDataAndSaveLocally()
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.cloud_download),
