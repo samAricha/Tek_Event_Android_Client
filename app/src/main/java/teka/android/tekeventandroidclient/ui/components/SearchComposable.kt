@@ -34,6 +34,7 @@ fun SearchComposable(onSearch: (query: String) -> Unit) {
             value = searchText,
             onValueChange = {
                 searchText = it
+                onSearch(it.text)
             },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(
