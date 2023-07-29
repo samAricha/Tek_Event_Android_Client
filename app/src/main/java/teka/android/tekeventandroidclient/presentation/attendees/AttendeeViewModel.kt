@@ -42,7 +42,7 @@ class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVi
 
     fun toggleArrivalStatus(visitorId: Int) {
         viewModelScope.launch {
-            eventVisitorDao.toggleArrival(visitorId)
+            eventVisitorDao.toggleArrival(visitorId) // Implement this in your DAO
         }
     }
 }
