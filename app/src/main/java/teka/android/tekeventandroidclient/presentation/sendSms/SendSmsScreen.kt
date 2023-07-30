@@ -3,6 +3,7 @@ package teka.android.tekeventandroidclient.presentation.sendSms
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,8 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +34,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.ui.theme.Poppins
+import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
+import teka.android.tekeventandroidclient.ui.theme.Shapes
 import teka.android.tekeventandroidclient.ui.theme.greenColor
 
 @Composable
@@ -41,9 +49,9 @@ fun SendSmsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 30.dp),
+            .padding(all = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+//        verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = "Compose your Message",
@@ -68,36 +76,86 @@ fun SendSmsScreen(
             painter = painterResource(id = R.drawable.sms),
             contentDescription = "Sms Logo",
             modifier = Modifier
-                .size(200.dp)
+                .size(150.dp)
                 .padding(bottom = 16.dp),
             contentScale = ContentScale.Fit
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        TextField(
+//        TextField(
+//            value = viewModel.message,
+//            onValueChange = { viewModel.message = it },
+//            placeholder = { Text(text = "Enter your message") },
+//            modifier = Modifier
+//                .padding(16.dp)
+//                .fillMaxWidth(),
+//            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
+//            singleLine = false
+//        )
+        OutlinedTextField(
             value = viewModel.message,
-            onValueChange = { viewModel.message = it },
-            placeholder = { Text(text = "Enter your message") },
+            onValueChange = {
+                viewModel.message = it
+            },
+            label = {
+                Text(text = "Message")
+            },
             modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
-            singleLine = false
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .padding(top = 10.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = PrimaryColor,
+                textColor = Color.Black
+
+            ),
+            keyboardOptions = KeyboardOptions(
+                keyboardType =
+                KeyboardType.Text
+            ),
+            singleLine = false,
+            shape = Shapes.large,
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+
+
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+//        Button(
+//            onClick = {
+//                viewModel.sendMessage()
+//                navController.navigate(Screen.AttendeeScreen.route)
+//            }
+//        ) {
+//            Text(
+//                text = "Send SMS",
+//                modifier = Modifier.padding(10.dp),
+//                color = Color.White,
+//                fontSize = 15.sp
+//            )
+//        }
+
 
         Button(
-            onClick = { viewModel.sendMessage()
-                navController.navigate(Screen.AttendeeScreen.route)}
+            onClick = {
+                viewModel.sendMessage()
+                navController.navigate(Screen.AttendeeScreen.route)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .padding(top = 20.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = PrimaryColor,
+                contentColor = Color.White
+            ),
+            contentPadding = PaddingValues(vertical = 14.dp),
+            shape = Shapes.large,
         ) {
-            Text(
-                text = "Send SMS",
-                modifier = Modifier.padding(10.dp),
-                color = Color.White,
-                fontSize = 15.sp
-            )
+            Text(text = "Save Guest", fontFamily = Poppins)
+
         }
     }
 }
