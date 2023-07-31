@@ -50,11 +50,11 @@ fun GuestRegistrationScreen(navController: NavHostController) {
     ) {
         // Organization Logo
         Image(
-            painter = painterResource(id = R.drawable.event),
+            painter = painterResource(id = R.drawable.calendar),
             contentDescription = "Organization Logo",
             modifier = Modifier
                 .size(150.dp)
-                .padding(bottom = 16.dp),
+                .padding(bottom = 16.dp, top = 16.dp),
             contentScale = ContentScale.Fit
         )
 
