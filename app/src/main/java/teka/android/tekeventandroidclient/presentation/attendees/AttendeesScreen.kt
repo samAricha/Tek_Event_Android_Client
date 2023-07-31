@@ -1,6 +1,7 @@
 package teka.android.tekeventandroidclient.presentation.attendees
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -41,6 +42,8 @@ import kotlinx.coroutines.flow.flowOn
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationViewModel
 import teka.android.tekeventandroidclient.ui.components.SearchComposable
+import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
+import teka.android.tekeventandroidclient.ui.theme.PrimaryVariant
 
 @SuppressLint("FlowOperatorInvokedInComposition", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -55,10 +58,14 @@ fun AttendeesScreen(){
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                // Define your action for adding a visitor here
-                // For example, navigate to another composable/screen or show a dialog
-            }) {
-                Icon(Icons.Default.Add, contentDescription = "Add Visitor")
+            },
+            backgroundColor = Color.White
+            ) {
+                Icon(
+                    Icons.Default.Add,
+                    contentDescription = "Add Visitor",
+                    modifier = Modifier.size(38.dp),
+                tint = PrimaryColor)
             }
         }
     ) {

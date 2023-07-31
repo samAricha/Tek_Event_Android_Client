@@ -7,15 +7,29 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import teka.android.tekeventandroidclient.data.dataStore.DataStoreRepository
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.TekEventDatabase
 import teka.android.tekeventandroidclient.domain.interfaces.SmsSender
+import teka.android.tekeventandroidclient.presentation.splashScreen.SplashViewModel
 import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object TekEventAndroidModule {
+
+    @Provides
+    @Singleton
+    fun provideDataStoreRepository(
+        @ApplicationContext context: Context
+    ) = DataStoreRepository(context = context)
+
+    @Provides
+    @Singleton
+    fun provideSplashViewModel(repository: DataStoreRepository): SplashViewModel {
+        return SplashViewModel(repository)
+    }
 
     @Provides
     @Singleton

@@ -46,6 +46,7 @@ import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.presentation.attendees.AttendeeViewModel
 import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationViewModel
 import teka.android.tekeventandroidclient.ui.components.SearchComposable
+import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 
 @SuppressLint("FlowOperatorInvokedInComposition", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -65,10 +66,13 @@ fun DashboardScreen(){
             FloatingActionButton(onClick = {
                 Toast.makeText(context, "Fetching data...", Toast.LENGTH_SHORT).show()
                 dashboardViewModel.getRemoteDataAndSaveLocally()
-            }) {
+            },
+            backgroundColor = Color.White) {
                 Icon(
                     painter = painterResource(id = R.drawable.cloud_download),
-                    contentDescription = "Download Contacts"
+                    contentDescription = "Download Contacts",
+                    modifier = Modifier.size(38.dp),
+                    tint = PrimaryColor
                 )
             }
         }
