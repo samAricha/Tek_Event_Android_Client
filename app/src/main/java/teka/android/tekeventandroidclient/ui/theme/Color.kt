@@ -12,7 +12,7 @@ val Pink40 = Color(0xFF7D5260)
 
 val PrimaryColor = Color(0xFF8062D6) // Vibrant Red: Passion, excitement, and energy.
 val PrimaryVariant = Color(0x999288F8) // Semi-transparent Vibrant Red for overlays and hover states.
-val SecondaryColor = Color(0xFFF2D1D1) // Light Vibrant Red: A tint of the vibrant red for backgrounds and subtle elements.
+val SecondaryColor = Color(0xFFFFD2D7) // Light Vibrant Red: A tint of the vibrant red for backgrounds and subtle elements.
 val SecondaryVariant = Color(0x99F2D1D1) // Semi-transparent Light Vibrant Red.
 val BackgroundColor = Color(0xFFFFFFFF) // White: Provides a neutral backdrop allowing the vibrant red to stand out.
 val OnPrimary = Color(0xFFFFFFFF) // White text on Primary Vibrant Red for optimum readability.

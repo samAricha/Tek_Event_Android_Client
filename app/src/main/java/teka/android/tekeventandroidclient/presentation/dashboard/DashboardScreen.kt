@@ -47,6 +47,7 @@ import teka.android.tekeventandroidclient.presentation.attendees.AttendeeViewMod
 import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationViewModel
 import teka.android.tekeventandroidclient.ui.components.SearchComposable
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
+import teka.android.tekeventandroidclient.ui.theme.SecondaryColor
 
 @SuppressLint("FlowOperatorInvokedInComposition", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -150,7 +151,7 @@ fun VisitorItem(visitor: EventVisitor) {
                     Icon(
                         Icons.Default.Check,
                         contentDescription = "Mark as Arrived",
-                        tint = Color.Green
+                        tint = SecondaryColor
                     )
                 }
             }
