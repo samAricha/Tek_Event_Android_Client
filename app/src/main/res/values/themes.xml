@@ -2,13 +2,13 @@
 <resources>
 
     <style name="Theme.TekEventAndroidClient" parent="android:Theme.Material.Light.NoActionBar" >
-        <item name="android:statusBarColor">@color/tek_event_purple</item>
+        <item name="android:statusBarColor">@color/tek_event_purple_variant</item>
     </style>
 
 
-    <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/event</item>
+    <style name="Theme.CustomSplashScreenTheme" parent="Theme.TekEventAndroidClient">
+        <item name="windowSplashScreenBackground">@color/tek_event_purple_variant</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/event_icon2</item>
         <item name="windowSplashScreenAnimationDuration">600</item>
 
         <item name="postSplashScreenTheme">@style/Theme.TekEventAndroidClient</item>

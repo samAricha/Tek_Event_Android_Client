@@ -60,7 +60,7 @@ fun AttendeesScreen(){
         floatingActionButton = {
             FloatingActionButton(onClick = {
             },
-            backgroundColor = Color.White
+            backgroundColor = SecondaryColor
             ) {
                 Icon(
                     Icons.Default.Add,

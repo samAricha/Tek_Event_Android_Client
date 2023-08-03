@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
@@ -18,7 +16,7 @@
         android:icon="@mipmap/event_icon2"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TekEventAndroidClient"
+        android:theme="@style/Theme.CustomSplashScreenTheme"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
