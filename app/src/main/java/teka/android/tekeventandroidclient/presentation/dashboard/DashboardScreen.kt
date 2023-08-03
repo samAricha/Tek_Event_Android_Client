@@ -115,6 +115,10 @@ fun DashboardScreen(){
 
     )
 
+
+
+
+
     val guestRegistrationViewModel: GuestRegistrationViewModel = hiltViewModel();
     val dashboardViewModel: DashboardViewModel = hiltViewModel();
 

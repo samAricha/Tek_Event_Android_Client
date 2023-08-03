@@ -16,6 +16,7 @@ import kotlinx.coroutines.withContext
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
+import teka.android.tekeventandroidclient.utils.trimToLastNineDigits
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,10 +37,21 @@ class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDa
             withContext(Dispatchers.IO) {
                 val visitor = EventVisitor(first_name =  guestName, phone = phoneNumber)
                 eventVisitorDao.insertVisitor(visitor)
-                appSmsSender.sendSms("+254708392326", "Hi $guestName welcome to TekEvent")
+                val originalString = phoneNumber
+                val trimmedString = trimToLastNineDigits(originalString)
+                appSmsSender.sendSms(trimmedString, "Hi $guestName welcome to TekEvent")
             }
         }
 
     }
+
+
+//    fun trimToLastNineDigits(input: String): String {
+//        return if (input.length > 9) {
+//            input.substring(input.length - 9)
+//        } else {
+//            input
+//        }
+//    }
 
 }

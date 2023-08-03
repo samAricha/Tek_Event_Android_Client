@@ -8,6 +8,8 @@ import javax.inject.Inject
 class AppSmsSender @Inject constructor(private val applicationContext: Context) : SmsSender {
     override fun sendSms(number: String, message: String) {
         val smsManager = SmsManager.getDefault()
-        smsManager.sendTextMessage("+254708392326", null, message, null, null)
+        val countryCode = "+254";
+        val officialNumber = countryCode+number;
+        smsManager.sendTextMessage(officialNumber, null, message, null, null)
     }
 }

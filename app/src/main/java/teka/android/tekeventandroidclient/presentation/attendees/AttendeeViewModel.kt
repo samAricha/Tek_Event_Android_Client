@@ -1,6 +1,7 @@
 package teka.android.tekeventandroidclient.presentation.attendees
 
 import android.app.Application
+import android.media.metrics.Event
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,12 +9,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
+import teka.android.tekeventandroidclient.utils.trimToLastNineDigits
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,7 +49,10 @@ class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVi
     fun toggleArrivalStatus(visitorId: Int, visitorName: String) {
         viewModelScope.launch {
             eventVisitorDao.toggleArrival(visitorId)
-            appSmsSender.sendSms("+254708392326", "Hi $visitorName welcome to TekEvent")
+            val eventVisitor:EventVisitor = eventVisitorDao.getEventVisitorsById(visitorId).first()
+            val originalString = eventVisitor.phone
+            val trimmedString = trimToLastNineDigits(originalString)
+            appSmsSender.sendSms(trimmedString, "Hi $visitorName welcome to TekEvent")
 
         }
     }
