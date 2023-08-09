@@ -7,12 +7,15 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import teka.android.tekeventandroidclient.authentication.AuthManager
 import teka.android.tekeventandroidclient.data.dataStore.DataStoreRepository
+import teka.android.tekeventandroidclient.data.remote.retrofit.RetrofitProvider
+import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val repository: DataStoreRepository
+    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
     private val mutableStateFlow = MutableStateFlow(true)
@@ -20,8 +23,14 @@ class SplashViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            delay(2000)
+            val authService = RetrofitProvider.createAuthService()
+            val authManager = AuthManager(authService, dataStoreRepository)
+            val authViewModel = AuthViewModel(authManager)
+
+            delay(100)
             mutableStateFlow.value = false
         }
     }
+
+
 }

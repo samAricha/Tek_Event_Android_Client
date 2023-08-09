@@ -10,7 +10,7 @@ import teka.android.tekeventandroidclient.data.room_remote_sync.models.VisitorUp
 interface VisitorListService {
 
 
-    @GET("api/attendance")
+    @GET("show-form")
     suspend fun getVisitorList(
         @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1

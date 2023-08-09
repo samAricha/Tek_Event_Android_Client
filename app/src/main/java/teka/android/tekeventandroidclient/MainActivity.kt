@@ -20,7 +20,6 @@ import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 import teka.android.tekeventandroidclient.ui.theme.TekEventAndroidClientTheme
 import javax.inject.Inject
 
-@SuppressLint("CustomSplashScreen")
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @AndroidEntryPoint
@@ -30,12 +29,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.statusBarColor = PrimaryColor.toArgb()
-        val splashScreen = installSplashScreen()
+
+            val splashScreen = installSplashScreen()
+            splashScreen.setKeepOnScreenCondition{splashViewModel.isLoading.value}
+
+
         super.onCreate(savedInstanceState)
-
-        splashScreen.setKeepOnScreenCondition{splashViewModel.isLoading.value}
-
-
 
         setContent {
             TekEventAndroidClientTheme {

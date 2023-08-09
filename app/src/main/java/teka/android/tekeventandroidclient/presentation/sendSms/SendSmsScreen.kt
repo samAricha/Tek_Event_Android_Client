@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import teka.android.tekeventandroidclient.R
@@ -44,7 +45,7 @@ fun SendSmsScreen(
     navController: NavHostController,
 ) {
 //    val context = LocalContext.current
-    val viewModel: SmsViewModel = viewModel()
+    val viewModel: SmsViewModel = hiltViewModel()
 
     Column(
         modifier = Modifier
@@ -141,7 +142,7 @@ fun SendSmsScreen(
         Button(
             onClick = {
                 viewModel.sendMessage()
-                navController.navigate(Screen.AttendeeScreen.route)
+//                navController.navigate(Screen.AttendeeScreen.route)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -154,7 +155,7 @@ fun SendSmsScreen(
             contentPadding = PaddingValues(vertical = 14.dp),
             shape = Shapes.large,
         ) {
-            Text(text = "Save Guest", fontFamily = Poppins)
+            Text(text = "Send SMS", fontFamily = Poppins)
 
         }
     }

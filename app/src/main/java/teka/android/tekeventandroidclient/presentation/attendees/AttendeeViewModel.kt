@@ -17,6 +17,7 @@ import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
 import teka.android.tekeventandroidclient.utils.trimToLastNineDigits
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -47,13 +48,13 @@ class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVi
     }
 
     fun toggleArrivalStatus(visitorId: Int, visitorName: String) {
+        val capitalizedVisitorName = visitorName.replaceFirstChar { it.uppercaseChar() }
         viewModelScope.launch {
             eventVisitorDao.toggleArrival(visitorId)
             val eventVisitor:EventVisitor = eventVisitorDao.getEventVisitorsById(visitorId).first()
             val originalString = eventVisitor.phone
-            val trimmedString = trimToLastNineDigits(originalString)
-            appSmsSender.sendSms(trimmedString, "Hi $visitorName welcome to TekEvent")
-
+            val trimmedNumber = trimToLastNineDigits(originalString)
+            appSmsSender.sendSms(trimmedNumber, "Hi $capitalizedVisitorName welcome to Coders Club Meeting")
         }
     }
 }

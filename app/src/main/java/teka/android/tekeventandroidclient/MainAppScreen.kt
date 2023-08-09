@@ -19,6 +19,8 @@ import teka.android.tekeventandroidclient.navigation.MainNavGraph
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 
+
+
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainAppScreen() {
@@ -35,7 +37,9 @@ fun MainAppScreen() {
                         textAlign = TextAlign.Center,
                         color = Color.White
                     )
-                })
+                },
+//                backgroundColor = PrimaryVariant
+            )
         },
 
         bottomBar = {

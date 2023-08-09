@@ -243,6 +243,8 @@ fun MultiFloatingButton(
     context: Context,
     items:List<MiniFabItm>
 ){
+    val dashboardViewModel: DashboardViewModel = hiltViewModel();
+
     val transition = updateTransition(targetState = multiFloatingState, label = "transition")
     
     val rotate by transition.animateFloat(label = "rotate") {
@@ -278,6 +280,7 @@ fun MultiFloatingButton(
                     onMiniFabItemClick = {minFabItem ->
                                          when(minFabItem.identifier){
                                              Identifier.Download.name -> {
+                                                 dashboardViewModel.getRemoteDataAndSaveLocally()
                                                 Toast.makeText(context,"Download", Toast.LENGTH_SHORT).show()
                                              }
                                              Identifier.Upload.name -> {

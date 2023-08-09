@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -14,7 +15,7 @@ import java.io.IOException
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "on_boarding_pref")
 val Context.loggedInDataStore: DataStore<Preferences> by preferencesDataStore(name = "logged_in_pref")
-
+private val USER_TOKEN_KEY = stringPreferencesKey("user_token")
 
 class DataStoreRepository(context: Context) {
 
@@ -31,6 +32,23 @@ class DataStoreRepository(context: Context) {
             preferences[PreferencesKey.onBoardingKey] = completed
         }
     }
+
+    val getAccessToken: Flow<String> = dataStore.data.map { preferences ->
+        preferences[USER_TOKEN_KEY] ?: ""
+    }
+
+    suspend fun saveToken(token: String) {
+        dataStore.edit { preferences ->
+            preferences[USER_TOKEN_KEY] = token
+        }
+    }
+
+
+
+
+
+
+
 
     suspend fun saveLoggedInState(isLoggedIn: Boolean) {
         loggedInDataStore.edit { preferences ->
