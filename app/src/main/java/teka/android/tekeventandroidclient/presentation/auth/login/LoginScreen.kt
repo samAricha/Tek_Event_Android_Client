@@ -1,6 +1,7 @@
 package teka.android.tekeventandroidclient.presentation.auth.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -8,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -23,10 +25,12 @@ import teka.android.tekeventandroidclient.ui.theme.*
 fun LoginScreen(
     onClick: () -> Unit,
 ) {
+    val mContext = LocalContext.current
     Log.d("lscrn", "inside login screen")
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isPasswordOpen by remember { mutableStateOf(false) }
+
 
     Column() {
 
@@ -195,8 +199,12 @@ fun LoginScreen(
                         }
 
 
+
                         TextButton(
-                            onClick = {},
+                            onClick = {
+                                Toast.makeText(mContext, "Feature coming soon", Toast.LENGTH_SHORT).show()
+
+                            },
                             contentPadding = PaddingValues(vertical = 0.dp)
                         ) {
                             Text(
@@ -207,7 +215,9 @@ fun LoginScreen(
                             )
                         }
                         TextButton(
-                            onClick = {},
+                            onClick = {
+                                      Toast.makeText(mContext, "Feature Coming Soon", Toast.LENGTH_SHORT).show()
+                            },
                             contentPadding = PaddingValues(vertical = 0.dp)
                         ) {
                             Text(
