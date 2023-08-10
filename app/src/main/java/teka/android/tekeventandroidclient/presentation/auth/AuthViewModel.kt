@@ -7,10 +7,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.authentication.AuthManager
+import teka.android.tekeventandroidclient.data.dataStore.DataStoreRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val authManager: AuthManager) : ViewModel() {
+class AuthViewModel @Inject constructor(
+    private val authManager: AuthManager,
+    private val dataStoreRepository: DataStoreRepository
+    ) : ViewModel() {
 
     private var _isAuthenticated = MutableStateFlow(false)
     val isAuthenticated: StateFlow<Boolean> = _isAuthenticated
@@ -25,6 +29,7 @@ class AuthViewModel @Inject constructor(private val authManager: AuthManager) : 
         viewModelScope.launch {
             val success = authManager.login(email, password)
             _isLoggedIn.value = success
+            if (success)dataStoreRepository.saveLoggedInState(isLoggedIn = success)
         }
     }
 
@@ -32,6 +37,7 @@ class AuthViewModel @Inject constructor(private val authManager: AuthManager) : 
         viewModelScope.launch {
             val success = authManager.register(name, email, password, passwordConfirmation)
             _isRegistered.value = success
+            if (success)dataStoreRepository.saveLoggedInState(isLoggedIn = success)
         }
     }
 
