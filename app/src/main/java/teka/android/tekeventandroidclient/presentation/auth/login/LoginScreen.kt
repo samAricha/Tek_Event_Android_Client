@@ -36,15 +36,21 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isPasswordOpen by remember { mutableStateOf(false) }
-    val isRegisteredState = authViewModel.isRegistered.collectAsState()
+    val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
 
 
 
     // Automatically navigate when registration status changes
-    if (isRegisteredState.value) {
-        LaunchedEffect(key1 = isRegisteredState) {
-            navController.navigate(route = To_MAIN_GRAPH_ROUTE)
+    LaunchedEffect(key1 = Unit) {
+        val job = authViewModel.isLoggedIn.collect { isLoggedIn ->
+            if (isLoggedIn) {
+                navController.navigate(To_MAIN_GRAPH_ROUTE)
+            }
         }
+
+//        onDispose {
+//            job.cancel()
+//        }
     }
 
 
@@ -60,15 +66,14 @@ fun LoginScreen(
                     .padding(top = 100.dp),
             ) {
                 Text(
-                    text = "welcome to TekEvent",
+                    text = "Welcome to TekEvent",
                     fontSize = 28.sp,
-                    color = Color.White,
+                    color = PrimaryColor,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 30.dp),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
-                    fontFamily = ReemKufi
                 )
 
                 Button(
@@ -194,7 +199,9 @@ fun LoginScreen(
 
                         Button(
 //                            Log.d("TAG2", splashViewModel.isLoading.value.toString())
-                            onClick = { navController.navigate(To_MAIN_GRAPH_ROUTE)},
+                            onClick = {
+                                authViewModel.login(email, password)
+                                      },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 20.dp)

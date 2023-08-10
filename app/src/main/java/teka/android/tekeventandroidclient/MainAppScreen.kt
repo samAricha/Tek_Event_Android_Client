@@ -124,13 +124,13 @@ fun MainAppScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.dashboard),
-                            contentDescription = "Dashboard",
+                            contentDescription = "Dash",
                             tint = getIconTint(currentRoute == Screen.DashboardScreen.route)
                         )
                     },
                     label = {
                         Text(
-                            text = "Dashboard",
+                            text = "Stats",
                             color = getIconTint(currentRoute == Screen.DashboardScreen.route)
                         )
 

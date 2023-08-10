@@ -65,10 +65,16 @@ fun RegisterScreen(
 
 
     // Automatically navigate when registration status changes
-    if (isRegisteredState.value) {
-        LaunchedEffect(key1 = isRegisteredState) {
-            navController.navigate(route = To_MAIN_GRAPH_ROUTE)
+    LaunchedEffect(key1 = Unit) {
+        val job = authViewModel.isRegistered.collect { isRegisterd ->
+            if (isRegisterd) {
+                navController.navigate(To_MAIN_GRAPH_ROUTE)
+            }
         }
+
+//        onDispose {
+//            job.cancel()
+//        }
     }
 
 
@@ -275,7 +281,7 @@ fun RegisterScreen(
                     contentPadding = PaddingValues(vertical = 14.dp),
                     shape = Shapes.large,
                 ) {
-                    Text(text = "Login", fontFamily = Poppins)
+                    Text(text = "Register", fontFamily = Poppins)
 
                 }
 
