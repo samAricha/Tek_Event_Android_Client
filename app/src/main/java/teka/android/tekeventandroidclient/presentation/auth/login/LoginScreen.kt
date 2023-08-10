@@ -18,21 +18,34 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.navigation.To_MAIN_GRAPH_ROUTE
+import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
 import teka.android.tekeventandroidclient.ui.theme.*
 
 @Composable
 fun LoginScreen(
-    navController: NavController
+    navController: NavController,
+    authViewModel: AuthViewModel = hiltViewModel()
 ) {
     val mContext = LocalContext.current
     Log.d("lscrn", "inside login screen")
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isPasswordOpen by remember { mutableStateOf(false) }
+    val isRegisteredState = authViewModel.isRegistered.collectAsState()
+
+
+
+    // Automatically navigate when registration status changes
+    if (isRegisteredState.value) {
+        LaunchedEffect(key1 = isRegisteredState) {
+            navController.navigate(route = To_MAIN_GRAPH_ROUTE)
+        }
+    }
 
 
     Column() {

@@ -21,6 +21,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,6 +42,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.navigation.To_MAIN_GRAPH_ROUTE
 import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
 import teka.android.tekeventandroidclient.ui.theme.BottomBoxShape
 import teka.android.tekeventandroidclient.ui.theme.Poppins
@@ -48,7 +50,10 @@ import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 import teka.android.tekeventandroidclient.ui.theme.Shapes
 
 @Composable
-fun RegisterScreen(authViewModel: AuthViewModel = hiltViewModel(), navController: NavController) {
+fun RegisterScreen(
+    navController: NavController,
+    authViewModel: AuthViewModel = hiltViewModel()
+) {
     var userName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -56,6 +61,15 @@ fun RegisterScreen(authViewModel: AuthViewModel = hiltViewModel(), navController
     val isRegisteredState = authViewModel.isRegistered.collectAsState()
     var isPasswordOpen by remember { mutableStateOf(false) }
     val mContext = LocalContext.current
+
+
+
+    // Automatically navigate when registration status changes
+    if (isRegisteredState.value) {
+        LaunchedEffect(key1 = isRegisteredState) {
+            navController.navigate(route = To_MAIN_GRAPH_ROUTE)
+        }
+    }
 
 
 
@@ -248,8 +262,7 @@ fun RegisterScreen(authViewModel: AuthViewModel = hiltViewModel(), navController
 
                 Button(
                     onClick = {
-
-//                                navController.navigate(To_MAIN_GRAPH_ROUTE)
+                        authViewModel.register(userName, email, password, passwordConfirmation)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
