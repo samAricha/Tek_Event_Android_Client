@@ -2,12 +2,15 @@ package teka.android.tekeventandroidclient.presentation.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.authentication.AuthManager
+import javax.inject.Inject
 
-class AuthViewModel(private val authManager: AuthManager) : ViewModel() {
+@HiltViewModel
+class AuthViewModel @Inject constructor(private val authManager: AuthManager) : ViewModel() {
 
     private var _isAuthenticated = MutableStateFlow(false)
     val isAuthenticated: StateFlow<Boolean> = _isAuthenticated

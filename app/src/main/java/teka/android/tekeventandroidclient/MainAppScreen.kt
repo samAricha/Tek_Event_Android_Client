@@ -16,16 +16,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import teka.android.tekeventandroidclient.navigation.MainNavGraph
+import teka.android.tekeventandroidclient.navigation.RootNavGraph
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
-
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainAppScreen() {
     val navHostController: NavHostController = rememberNavController()
-
 
     Scaffold(
         topBar = {
@@ -38,7 +37,6 @@ fun MainAppScreen() {
                         color = Color.White
                     )
                 },
-//                backgroundColor = PrimaryVariant
             )
         },
 
@@ -142,7 +140,7 @@ fun MainAppScreen() {
         }
         ) {
             Box(modifier = Modifier.padding(bottom = 60.dp)) {
-                MainNavGraph(navController = navHostController)
+                RootNavGraph(navController = navHostController)
             }
         }
 }

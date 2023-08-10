@@ -35,7 +35,9 @@ import teka.android.tekeventandroidclient.ui.theme.Shapes
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun GuestRegistrationScreen(navController: NavHostController) {
+fun GuestRegistrationScreen(
+    navController: NavHostController
+) {
 
     val viewModel: GuestRegistrationViewModel = hiltViewModel()
     val guestNameState = mutableStateOf("")

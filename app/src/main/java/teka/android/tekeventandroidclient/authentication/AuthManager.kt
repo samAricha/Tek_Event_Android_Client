@@ -7,14 +7,15 @@ import teka.android.tekeventandroidclient.authentication.models.LoginRequest
 import teka.android.tekeventandroidclient.authentication.models.RegisterRequest
 import teka.android.tekeventandroidclient.data.dataStore.DataStoreRepository
 import teka.android.tekeventandroidclient.data.remote.retrofit.AuthService
+import teka.android.tekeventandroidclient.data.remote.retrofit.RetrofitProvider
+import javax.inject.Inject
 
 
-
-class AuthManager(private val authService: AuthService,
+class AuthManager @Inject constructor(
                   private val dataStoreRepository: DataStoreRepository
 ) {
 
-
+    private val authService: AuthService = RetrofitProvider.createAuthService()
     suspend fun login(email: String, password: String): Boolean {
         val response = authService.login(LoginRequest(email, password))
         if (response.isSuccessful) {

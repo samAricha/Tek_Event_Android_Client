@@ -6,15 +6,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.google.accompanist.pager.ExperimentalPagerApi
+import teka.android.tekeventandroidclient.authentication.models.RegisterRequest
 import teka.android.tekeventandroidclient.presentation.auth.login.LoginScreen
+import teka.android.tekeventandroidclient.presentation.auth.registration.RegisterScreen
+import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationScreen
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalPagerApi::class)
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController
 ){
-
- /*   navigation(
-        startDestination = Screen.LoginScreen.route,
+    navigation(
+        startDestination = Screen.RegisterScreen.route,
         route = AUTH_GRAPH_ROUTE
     ){
 
@@ -30,8 +31,13 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
 
+        composable(
+            route = Screen.RegisterScreen.route
+        ) {
+            RegisterScreen(
 
+            )
+        }
 
-
-    }*/
+    }
 }

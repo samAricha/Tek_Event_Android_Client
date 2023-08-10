@@ -10,7 +10,6 @@ import teka.android.tekeventandroidclient.MainAppScreen
 fun RootNavGraph(
     navController: NavHostController,
     startDestination: String = To_MAIN_GRAPH_ROUTE
-
 ) {
     NavHost(navController = navController,
         startDestination = startDestination,

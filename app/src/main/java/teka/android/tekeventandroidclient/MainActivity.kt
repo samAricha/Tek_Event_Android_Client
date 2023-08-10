@@ -10,11 +10,14 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
+import teka.android.tekeventandroidclient.navigation.RootNavGraph
 import teka.android.tekeventandroidclient.presentation.splashScreen.SplashViewModel
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 import teka.android.tekeventandroidclient.ui.theme.TekEventAndroidClientTheme
@@ -30,8 +33,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.statusBarColor = PrimaryColor.toArgb()
 
-            val splashScreen = installSplashScreen()
-            splashScreen.setKeepOnScreenCondition{splashViewModel.isLoading.value}
+        installSplashScreen().setKeepOnScreenCondition {
+            Log.d("TAG2", splashViewModel.isLoading.value.toString())
+            !splashViewModel.isLoading.value
+        }
 
 
         super.onCreate(savedInstanceState)
@@ -42,7 +47,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainAppScreen()
+                    val startDestination by splashViewModel.startDestination
+                    startDestination?.let {
+                        RootNavGraph(navController = rememberNavController(),
+                            startDestination = it)
+//                        MainAppScreen()
+
+                    }
                 }
             }
         }

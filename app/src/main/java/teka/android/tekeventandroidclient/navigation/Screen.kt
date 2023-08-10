@@ -7,6 +7,8 @@ const val To_MAIN_GRAPH_ROUTE = "to_main_graph_route"
 
 
 sealed class Screen(val route: String) {
+    object RegisterScreen : Screen(route = "register_screen")
+    object LoginScreen : Screen(route = "login_screen")
     object WelcomeScreen : Screen(route = "welcome_screen")
     object AttendeeScreen : Screen(route = "attendee_screen")
     object SendSmsScreen: Screen(route = "sens_sms_screen")

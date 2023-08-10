@@ -43,13 +43,6 @@ class DataStoreRepository(context: Context) {
         }
     }
 
-
-
-
-
-
-
-
     suspend fun saveLoggedInState(isLoggedIn: Boolean) {
         loggedInDataStore.edit { preferences ->
             preferences[PreferencesKey.isLoggedInKey] = isLoggedIn
