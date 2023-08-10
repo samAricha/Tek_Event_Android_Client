@@ -23,8 +23,6 @@ class SplashViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
-    private val mutableStateFlow = MutableStateFlow(true)
-//    val isLoading = mutableStateFlow.asStateFlow()
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(true)
     val isLoading: State<Boolean> = _isLoading
@@ -34,10 +32,6 @@ class SplashViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-//            val authService = RetrofitProvider.createAuthService()
-//            val authManager = AuthManager(authService, dataStoreRepository)
-//            val authViewModel = AuthViewModel(authManager)
-
             dataStoreRepository.readLoggedInState().collect { completed ->
                 if (completed) {
                     _startDestination.value = To_MAIN_GRAPH_ROUTE

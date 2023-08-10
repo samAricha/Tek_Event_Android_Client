@@ -18,12 +18,15 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import teka.android.tekeventandroidclient.R
+import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.navigation.To_MAIN_GRAPH_ROUTE
 import teka.android.tekeventandroidclient.ui.theme.*
 
 @Composable
 fun LoginScreen(
-    onClick: () -> Unit,
+    navController: NavController
 ) {
     val mContext = LocalContext.current
     Log.d("lscrn", "inside login screen")
@@ -100,15 +103,15 @@ fun LoginScreen(
                                 email = it
                             },
                             label = {
-                                Text(text = "Email Address", color = Color.Green)
+                                Text(text = "Email Address", color = PrimaryColor)
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 20.dp)
                                 .padding(top = 10.dp),
                             colors = TextFieldDefaults.outlinedTextFieldColors(
-                                unfocusedBorderColor = Color.Green,
-                                textColor = Color.Yellow
+                                unfocusedBorderColor = PrimaryColor,
+                                textColor = PrimaryColor
 
                             ),
                             keyboardOptions = KeyboardOptions(
@@ -120,7 +123,7 @@ fun LoginScreen(
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_email),
                                     contentDescription = "",
-                                    tint = Color.Green,
+                                    tint = PrimaryColor,
                                     modifier = Modifier.size(24.dp)
                                 )
                             },
@@ -178,11 +181,7 @@ fun LoginScreen(
 
                         Button(
 //                            Log.d("TAG2", splashViewModel.isLoading.value.toString())
-                            onClick = onClick,
-//                            {
-//
-////                                navController.navigate(To_MAIN_GRAPH_ROUTE)
-//                                      },
+                            onClick = { navController.navigate(To_MAIN_GRAPH_ROUTE)},
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 20.dp)
@@ -216,7 +215,7 @@ fun LoginScreen(
                         }
                         TextButton(
                             onClick = {
-                                      Toast.makeText(mContext, "Feature Coming Soon", Toast.LENGTH_SHORT).show()
+                                      navController.navigate(route = Screen.RegisterScreen.route)
                             },
                             contentPadding = PaddingValues(vertical = 0.dp)
                         ) {

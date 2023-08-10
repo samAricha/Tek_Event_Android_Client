@@ -38,7 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import teka.android.tekeventandroidclient.R
+import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
 import teka.android.tekeventandroidclient.ui.theme.BottomBoxShape
 import teka.android.tekeventandroidclient.ui.theme.Poppins
@@ -46,7 +48,7 @@ import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 import teka.android.tekeventandroidclient.ui.theme.Shapes
 
 @Composable
-fun RegisterScreen(authViewModel: AuthViewModel = hiltViewModel()) {
+fun RegisterScreen(authViewModel: AuthViewModel = hiltViewModel(), navController: NavController) {
     var userName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -281,11 +283,11 @@ fun RegisterScreen(authViewModel: AuthViewModel = hiltViewModel()) {
                     )
                 }
                 TextButton(
-                    onClick = {},
+                    onClick = { navController.navigate(route = Screen.LoginScreen.route) },
                     contentPadding = PaddingValues(vertical = 0.dp)
                 ) {
                     Text(
-                        text = "Don't have an Account ? Sign Up",
+                        text = "Already have an Account ? Log In",
                         fontFamily = Poppins,
                         fontSize = 12.sp,
                     )
