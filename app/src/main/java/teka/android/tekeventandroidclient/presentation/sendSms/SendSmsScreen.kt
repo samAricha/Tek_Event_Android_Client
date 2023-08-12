@@ -74,10 +74,10 @@ fun SendSmsScreen(
 
 
         Image(
-            painter = painterResource(id = R.drawable.sms),
+            painter = painterResource(id = R.drawable.access),
             contentDescription = "Sms Logo",
             modifier = Modifier
-                .size(150.dp)
+                .size(250.dp)
                 .padding(bottom = 16.dp),
             contentScale = ContentScale.Fit
         )

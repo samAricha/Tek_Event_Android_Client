@@ -16,7 +16,7 @@ val Poppins = FontFamily(Font(R.font.poppins))
 val Typography = Typography(
     defaultFontFamily = ReemKufi,
     body1 = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = ReemKufi,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     )

@@ -8,6 +8,7 @@ import teka.android.tekeventandroidclient.presentation.attendees.AttendeesScreen
 import teka.android.tekeventandroidclient.presentation.dashboard.DashboardScreen
 import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationScreen
 import teka.android.tekeventandroidclient.presentation.sendSms.SendSmsScreen
+import teka.android.tekeventandroidclient.presentation.settings.SettingsScreen
 
 @Composable
 fun MainNavGraph(
@@ -34,6 +35,10 @@ fun MainNavGraph(
 
         composable(route = Screen.DashboardScreen.route) {
             DashboardScreen()
+        }
+
+        composable(route = Screen.SettingsScreen.route) {
+            SettingsScreen()
         }
 
     }

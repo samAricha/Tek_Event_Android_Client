@@ -2,6 +2,7 @@ package teka.android.tekeventandroidclient.presentation.auth.login
 
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -9,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -16,10 +18,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.navigation.To_MAIN_GRAPH_ROUTE
@@ -28,7 +33,7 @@ import teka.android.tekeventandroidclient.ui.theme.*
 
 @Composable
 fun LoginScreen(
-    navController: NavController,
+    navController: NavController = rememberNavController(),
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
     val mContext = LocalContext.current
@@ -37,8 +42,6 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var isPasswordOpen by remember { mutableStateOf(false) }
     val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
-
-
 
     // Automatically navigate when registration status changes
     LaunchedEffect(key1 = Unit) {
@@ -65,6 +68,15 @@ fun LoginScreen(
                 modifier = Modifier
                     .padding(top = 100.dp),
             ) {
+                Image(
+                    painter = painterResource(id = R.drawable.access),
+                    contentDescription = "Sms Logo",
+                    modifier = Modifier
+                        .size(150.dp)
+                        .padding(bottom = 16.dp),
+                    contentScale = ContentScale.Fit
+                )
+                Spacer(modifier = Modifier.height(20.dp))
                 Text(
                     text = "Welcome to TekEvent",
                     fontSize = 28.sp,
@@ -251,4 +263,10 @@ fun LoginScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun loginPreview(){
+    LoginScreen()
 }

@@ -136,6 +136,27 @@ fun MainAppScreen() {
 
                     }
                 )
+
+                BottomNavigationItem(
+                    selected = currentRoute?.startsWith(Screen.SettingsScreen.route) == true,
+                    onClick = {
+                        navHostController.navigate(route = Screen.SettingsScreen.route)
+                    },
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.settings),
+                            contentDescription = "Dash",
+                            tint = getIconTint(currentRoute == Screen.SettingsScreen.route)
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = "Stats",
+                            color = getIconTint(currentRoute == Screen.SettingsScreen.route)
+                        )
+
+                    }
+                )
             }
         }
         ) {

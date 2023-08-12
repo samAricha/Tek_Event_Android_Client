@@ -14,4 +14,5 @@ sealed class Screen(val route: String) {
     object SendSmsScreen: Screen(route = "sens_sms_screen")
     object GuestRegistrationScreen: Screen(route = "guest_registration_screen")
     object DashboardScreen: Screen(route = "dashboard_screen")
+    object SettingsScreen: Screen(route = "settings_screen")
 }

@@ -52,10 +52,10 @@ fun GuestRegistrationScreen(
     ) {
         // Organization Logo
         Image(
-            painter = painterResource(id = R.drawable.calendar),
+            painter = painterResource(id = R.drawable.record),
             contentDescription = "Organization Logo",
             modifier = Modifier
-                .size(150.dp)
+                .size(250.dp)
                 .padding(bottom = 16.dp, top = 16.dp),
             contentScale = ContentScale.Fit
         )
