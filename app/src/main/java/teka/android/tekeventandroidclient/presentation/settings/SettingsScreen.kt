@@ -34,9 +34,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import teka.android.tekeventandroidclient.R
+import teka.android.tekeventandroidclient.navigation.AUTH_GRAPH_ROUTE
 import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
 import teka.android.tekeventandroidclient.ui.theme.BackgroundColor
 import teka.android.tekeventandroidclient.ui.theme.LightPrimaryColor
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
@@ -47,14 +52,16 @@ import teka.android.tekeventandroidclient.ui.theme.blackColor
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(navController: NavController = rememberNavController(),
+                   authViewModel: AuthViewModel = hiltViewModel()
+) {
     LazyColumn() {
         item {
             HeaderText()
             ProfileCardUI()
             GeneralOptionsUI()
             SupportOptionsUI()
-            LogoutOptionsUI()
+            LogoutOptionsUI(navController = navController, authViewModel = authViewModel)
         }
 
     }
@@ -270,19 +277,24 @@ fun SupportOptionsUI() {
 
 @ExperimentalMaterialApi
 @Composable
-fun LogoutOptionsUI() {
+fun LogoutOptionsUI(navController: NavController, authViewModel: AuthViewModel) {
     Column(
         modifier = Modifier
             .padding(horizontal = 14.dp)
             .padding(top = 20.dp)
     ) {
-    }
+
         LogOutItem(
             icon = R.drawable.logout_orange,
             mainText = "Log Out",
-            onClick = {}
+            onClick = {
+
+                authViewModel.logout()
+                navController.navigate(AUTH_GRAPH_ROUTE)
+            }
         )
     }
+}
 
 @ExperimentalMaterialApi
 @Composable
