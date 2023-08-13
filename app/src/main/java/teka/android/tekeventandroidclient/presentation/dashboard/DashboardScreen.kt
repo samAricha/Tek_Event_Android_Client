@@ -315,7 +315,7 @@ fun MultiFloatingButton(
             Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Download Contacts",
-                    modifier = Modifier.size(38.dp).rotate(rotate),
+                    modifier = Modifier.size(28.dp).rotate(rotate),
                     tint = PrimaryColor,
                 )
 //            Icon(

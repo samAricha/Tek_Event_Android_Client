@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
@@ -47,11 +48,15 @@ import teka.android.tekeventandroidclient.ui.theme.blackColor
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SettingsScreen() {
-    Column() {
-        HeaderText()
-        ProfileCardUI()
-        GeneralOptionsUI()
-        SupportOptionsUI()
+    LazyColumn() {
+        item {
+            HeaderText()
+            ProfileCardUI()
+            GeneralOptionsUI()
+            SupportOptionsUI()
+            LogoutOptionsUI()
+        }
+
     }
 }
 
@@ -262,9 +267,78 @@ fun SupportOptionsUI() {
     }
 }
 
+
+@ExperimentalMaterialApi
+@Composable
+fun LogoutOptionsUI() {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 14.dp)
+            .padding(top = 20.dp)
+    ) {
+    }
+        LogOutItem(
+            icon = R.drawable.logout_orange,
+            mainText = "Log Out",
+            onClick = {}
+        )
+    }
+
 @ExperimentalMaterialApi
 @Composable
 fun SupportItem(icon: Int, mainText: String, onClick: () -> Unit) {
+    Card(
+        onClick = { onClick() },
+        backgroundColor = SecondaryVariant,
+        modifier = Modifier
+            .padding(bottom = 8.dp)
+            .fillMaxWidth(),
+        elevation = 0.dp,
+    ) {
+        Row(
+            modifier = Modifier.padding(vertical = 10.dp, horizontal = 14.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(34.dp)
+                        .clip(shape = Shapes.medium)
+                        .background(LightPrimaryColor)
+                ) {
+                    Icon(
+                        painter = painterResource(id = icon),
+                        contentDescription = "",
+                        tint = Color.Unspecified,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(14.dp))
+
+                Text(
+                    text = mainText,
+                    color = blackColor,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+            Icon(
+                painter = painterResource(id = R.drawable.ic_right_arrow),
+                contentDescription = "",
+                modifier = Modifier.size(16.dp)
+            )
+
+        }
+    }
+}
+
+@ExperimentalMaterialApi
+@Composable
+fun LogOutItem(icon: Int, mainText: String, onClick: () -> Unit) {
     Card(
         onClick = { onClick() },
         backgroundColor = SecondaryVariant,

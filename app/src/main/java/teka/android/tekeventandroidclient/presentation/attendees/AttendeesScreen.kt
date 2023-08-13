@@ -65,7 +65,7 @@ fun AttendeesScreen(){
                 Icon(
                     Icons.Default.Add,
                     contentDescription = "Add Visitor",
-                    modifier = Modifier.size(38.dp),
+                    modifier = Modifier.size(28.dp),
                 tint = PrimaryColor)
             }
         }

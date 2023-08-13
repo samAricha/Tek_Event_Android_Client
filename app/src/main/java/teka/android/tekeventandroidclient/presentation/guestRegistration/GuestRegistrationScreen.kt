@@ -32,6 +32,7 @@ import teka.android.tekeventandroidclient.presentation.sendSms.SmsViewModel
 import teka.android.tekeventandroidclient.ui.theme.Poppins
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 import teka.android.tekeventandroidclient.ui.theme.Shapes
+import teka.android.tekeventandroidclient.ui.theme.buttonShapes
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
@@ -46,7 +47,7 @@ fun GuestRegistrationScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 16.dp, end = 16.dp),
+            .padding(start = 8.dp, end = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
 //        verticalArrangement = Arrangement.Center
     ) {
@@ -170,7 +171,7 @@ fun GuestRegistrationScreen(
             shape = Shapes.large,
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
 
 //        Button(
@@ -201,7 +202,7 @@ fun GuestRegistrationScreen(
                 contentColor = Color.White
             ),
             contentPadding = PaddingValues(vertical = 14.dp),
-            shape = Shapes.large,
+            shape = buttonShapes.large,
         ) {
             Text(text = "Save Guest", fontFamily = Poppins)
 
