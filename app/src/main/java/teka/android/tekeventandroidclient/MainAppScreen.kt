@@ -10,14 +10,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import teka.android.tekeventandroidclient.navigation.MainNavGraph
 import teka.android.tekeventandroidclient.navigation.RootNavGraph
 import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.ui.theme.Poppins
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 
 
@@ -25,6 +29,12 @@ import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 @Composable
 fun MainAppScreen() {
     val navHostController: NavHostController = rememberNavController()
+
+    val bottomNavigationTextStyle = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.Light,
+        fontSize = 10.sp // Adjust the font size as needed
+    )
 
     Scaffold(
         topBar = {
@@ -51,7 +61,7 @@ fun MainAppScreen() {
                 fun getIconTint(selected: Boolean): Color = if (selected) {
                     PrimaryColor
                 } else {
-                    Color.Black
+                    Color.Gray
                 }
 
                 BottomNavigationItem(
@@ -71,7 +81,8 @@ fun MainAppScreen() {
                     label = {
                         Text(
                             text = "Home",
-                            color = getIconTint(currentRoute == Screen.AttendeeScreen.route)
+                            color = getIconTint(currentRoute == Screen.AttendeeScreen.route),
+                            style = bottomNavigationTextStyle
                         )
                     }
                 )
@@ -93,6 +104,7 @@ fun MainAppScreen() {
                     label = {
                         Text(
                             text = "Record",
+                            style = bottomNavigationTextStyle,
                             color = getIconTint(currentRoute == Screen.GuestRegistrationScreen.route)
                         )
                     }
@@ -112,6 +124,7 @@ fun MainAppScreen() {
                     label = {
                         Text(
                             text = "SMS",
+                            style = bottomNavigationTextStyle,
                             color = getIconTint(currentRoute == Screen.SendSmsScreen.route)
                         )
                     }
@@ -123,7 +136,7 @@ fun MainAppScreen() {
                     },
                     icon = {
                         Icon(
-                            painter = painterResource(R.drawable.dashboard),
+                            painter = painterResource(R.drawable.baseline_bar_chart_24),
                             contentDescription = "Dash",
                             tint = getIconTint(currentRoute == Screen.DashboardScreen.route)
                         )
@@ -131,6 +144,7 @@ fun MainAppScreen() {
                     label = {
                         Text(
                             text = "Stats",
+                            style = bottomNavigationTextStyle,
                             color = getIconTint(currentRoute == Screen.DashboardScreen.route)
                         )
 
@@ -145,13 +159,14 @@ fun MainAppScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(R.drawable.settings),
-                            contentDescription = "Dash",
+                            contentDescription = "Settings",
                             tint = getIconTint(currentRoute == Screen.SettingsScreen.route)
                         )
                     },
                     label = {
                         Text(
-                            text = "Stats",
+                            text = "Settings",
+                            style = bottomNavigationTextStyle,
                             color = getIconTint(currentRoute == Screen.SettingsScreen.route)
                         )
 
@@ -165,44 +180,3 @@ fun MainAppScreen() {
             }
         }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//to be used in refactoring the code
-data class BottomNavigationItem(
-    val route: String,
-    val icon: Int,
-    val contentDescription: String,
-    val label: String
-)
-
-val bottomNavigationItems = listOf(
-    BottomNavigationItem(
-        route = Screen.DashboardScreen.route,
-        icon = R.drawable.dashboard,
-        contentDescription = "Send SMS",
-        label = "Send SMS"
-    ),
-    BottomNavigationItem(
-        route = Screen.DashboardScreen.route,
-        icon = R.drawable.dashboard,
-        contentDescription = "Add Contact List",
-        label = "Recipients"
-    ),
-    BottomNavigationItem(
-        route = Screen.DashboardScreen.route,
-        icon = R.drawable.dashboard,
-        contentDescription = "Contact List",
-        label = "Other Screen"
-    )
-)
