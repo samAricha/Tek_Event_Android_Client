@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,12 +16,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import teka.android.tekeventandroidclient.navigation.AUTH_GRAPH_ROUTE
 import teka.android.tekeventandroidclient.navigation.MainNavGraph
 import teka.android.tekeventandroidclient.navigation.RootNavGraph
 import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.navigation.authNavGraph
+import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
 import teka.android.tekeventandroidclient.ui.theme.Poppins
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 
@@ -33,7 +38,7 @@ fun MainAppScreen() {
     val bottomNavigationTextStyle = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.Light,
-        fontSize = 10.sp // Adjust the font size as needed
+        fontSize = 10.sp
     )
 
     Scaffold(
@@ -176,7 +181,14 @@ fun MainAppScreen() {
         }
         ) {
             Box(modifier = Modifier.padding(bottom = 60.dp)) {
-                MainNavGraph(navController = navHostController)
+                val authViewModel: AuthViewModel = hiltViewModel()
+                val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
+                if(!isLoggedInState.value){
+                    RootNavGraph(navController = navHostController, startDestination = AUTH_GRAPH_ROUTE)
+                }else{
+                    MainNavGraph(navController = navHostController)
+                }
+
             }
         }
 }

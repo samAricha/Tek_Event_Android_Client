@@ -1,5 +1,6 @@
 package teka.android.tekeventandroidclient.presentation.auth
 
+import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,3 +51,5 @@ class AuthViewModel @Inject constructor(
     }
 
 }
+
+val UserState = compositionLocalOf<AuthViewModel> { error("User State Context Not Found!") }

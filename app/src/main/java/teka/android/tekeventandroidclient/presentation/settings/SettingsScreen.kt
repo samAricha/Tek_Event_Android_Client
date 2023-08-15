@@ -288,7 +288,6 @@ fun LogoutOptionsUI(navController: NavController, authViewModel: AuthViewModel) 
             icon = R.drawable.logout_orange,
             mainText = "Log Out",
             onClick = {
-
                 authViewModel.logout()
                 navController.navigate(AUTH_GRAPH_ROUTE)
             }
