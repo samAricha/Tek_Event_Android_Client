@@ -17,6 +17,7 @@ class AuthManager @Inject constructor(
 
     private val authService: AuthService = RetrofitProvider.createAuthService()
 
+
     suspend fun login(email: String, password: String): Boolean {
         val response = authService.login(LoginRequest(email, password))
         if (response.isSuccessful) {
@@ -43,6 +44,11 @@ class AuthManager @Inject constructor(
 
     suspend fun getAuthToken(): String {
         return dataStoreRepository.getAccessToken.first()
+    }
+
+    suspend fun isAuthenticated(): Boolean{
+        val isAuthenticated = dataStoreRepository.readLoggedInState()
+        return isAuthenticated.first()
     }
 
     suspend fun clearAuthToken() {

@@ -1,15 +1,24 @@
 package teka.android.tekeventandroidclient.navigation
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import teka.android.tekeventandroidclient.MainAppScreen
 import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
+import teka.android.tekeventandroidclient.presentation.auth.UserState
 import teka.android.tekeventandroidclient.presentation.auth.login.LoginScreen
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun RootNavGraph(
     navController: NavHostController,
@@ -25,12 +34,22 @@ fun RootNavGraph(
 
 
         composable(route = To_MAIN_GRAPH_ROUTE){
-            val authViewModel: AuthViewModel = hiltViewModel()
-            val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
-            if(!isLoggedInState.value){
-                LoginScreen(navController)
-            }else{
-                MainAppScreen()
+            val vm = UserState.current
+            val isLoggedInState by vm.isLoggedInState.collectAsState(initial = null)
+
+            if (isLoggedInState != null) {
+                if (isLoggedInState as Boolean) {
+                    MainAppScreen()
+                } else {
+                    LoginScreen(navController)
+                }
+            } else {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
             }
 
         }

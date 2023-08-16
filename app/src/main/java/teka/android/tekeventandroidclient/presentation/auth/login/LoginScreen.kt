@@ -1,7 +1,9 @@
 package teka.android.tekeventandroidclient.presentation.auth.login
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,15 +25,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.navigation.To_MAIN_GRAPH_ROUTE
 import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
+import teka.android.tekeventandroidclient.presentation.auth.UserState
 import teka.android.tekeventandroidclient.ui.theme.*
-
+import kotlin.coroutines.coroutineContext
 @Composable
 fun LoginScreen(
     navController: NavController = rememberNavController(),
@@ -43,6 +49,15 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var isPasswordOpen by remember { mutableStateOf(false) }
     val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
+    val vm = UserState.current.isLoggedIn.collectAsState()
+//    val logInStatus = vm.value
+    val logInStatus = true
+    Log.d("LOGIN STATUS: ", "${vm.value}")
+
+    @Composable
+    fun myToast(){
+        Toast.makeText(LocalContext.current, "state is $vm", Toast.LENGTH_LONG).show()
+    }
 
     // Automatically navigate when registration status changes
     LaunchedEffect(key1 = Unit) {
@@ -87,39 +102,6 @@ fun LoginScreen(
                     contentScale = ContentScale.Fit
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-//                Text(
-//                    text = "Welcome from TekEvent",
-//                    fontSize = 18.sp,
-//                    color = PrimaryColor,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(horizontal = 30.dp),
-//                    textAlign = TextAlign.Center,
-//                    fontWeight = FontWeight.Bold,
-//                )
-
-//                Button(
-//                    onClick = { },
-//                    colors = ButtonDefaults.buttonColors(
-//                        backgroundColor = Color.White
-//                    ),
-//                    contentPadding = PaddingValues(horizontal = 20.dp, vertical = 10.dp),
-//                    modifier = Modifier.padding(top = 20.dp),
-//                    shape = Shapes.large
-//                ) {
-//                    Row(verticalAlignment = Alignment.CenterVertically) {
-//                        Icon(
-//                            painter = painterResource(id = R.drawable.ic_google),
-//                            contentDescription = "",
-//                            tint = Color.Unspecified,
-//                            modifier = Modifier.size(26.dp)
-//                        )
-//                        Spacer(modifier = Modifier.width(20.dp))
-//                        Text(text = "Continue with Google", color = PrimaryColor, fontSize = 16.sp)
-//                    }
-//                }
-
-
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -130,12 +112,6 @@ fun LoginScreen(
                 ) {
 
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//                        Text(
-//                            text = "Log In with Email",
-////                            fontFamily = Poppins,
-//                            fontSize = 12.sp,
-//                            modifier = Modifier.padding(top = 16.dp)
-//                        )
 
                         OutlinedTextField(
                             value = email,
@@ -223,6 +199,11 @@ fun LoginScreen(
 //                            Log.d("TAG2", splashViewModel.isLoading.value.toString())
                             onClick = {
                                 authViewModel.login(email, password)
+                                Log.d("LOGIN STATUS: ", "${vm.value}")
+                                Toast.makeText(mContext, "Feature coming soon ${vm.value}", Toast.LENGTH_SHORT)
+                                    .show()
+
+
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -276,6 +257,13 @@ fun LoginScreen(
     }
     }
 }
+
+
+
+
+
+
+
 
 @Preview
 @Composable

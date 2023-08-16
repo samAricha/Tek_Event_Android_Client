@@ -289,7 +289,7 @@ fun LogoutOptionsUI(navController: NavController, authViewModel: AuthViewModel) 
             mainText = "Log Out",
             onClick = {
                 authViewModel.logout()
-                navController.navigate(AUTH_GRAPH_ROUTE)
+//                navController.navigate(AUTH_GRAPH_ROUTE)
             }
         )
     }
