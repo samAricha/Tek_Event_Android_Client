@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -57,75 +58,84 @@ fun LoginScreen(
     }
 
 
-    Column() {
-
+    LazyColumn() {
+        item {
         Box(
             contentAlignment = Alignment.BottomCenter,
-            modifier = Modifier
+            modifier = Modifier.padding(top = 10.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(top = 100.dp),
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.access),
-                    contentDescription = "Sms Logo",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .padding(bottom = 16.dp),
-                    contentScale = ContentScale.Fit
-                )
-                Spacer(modifier = Modifier.height(20.dp))
                 Text(
                     text = "Welcome to TekEvent",
-                    fontSize = 28.sp,
+                    fontSize = 18.sp,
                     color = PrimaryColor,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 30.dp),
+                        .padding(top = 10.dp),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                 )
+                Spacer(modifier = Modifier.height(20.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.access),
+                    contentDescription = "Accept Svg",
+                    modifier = Modifier
+                        .size(250.dp)
+                        .padding(bottom = 6.dp),
+                    contentScale = ContentScale.Fit
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+//                Text(
+//                    text = "Welcome from TekEvent",
+//                    fontSize = 18.sp,
+//                    color = PrimaryColor,
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(horizontal = 30.dp),
+//                    textAlign = TextAlign.Center,
+//                    fontWeight = FontWeight.Bold,
+//                )
 
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color.White
-                    ),
-                    contentPadding = PaddingValues(horizontal = 20.dp, vertical = 10.dp),
-                    modifier = Modifier.padding(top = 20.dp),
-                    shape = Shapes.large
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_google),
-                            contentDescription = "",
-                            tint = Color.Unspecified,
-                            modifier = Modifier.size(26.dp)
-                        )
-                        Spacer(modifier = Modifier.width(20.dp))
-                        Text(text = "Continue with Google", color = PrimaryColor, fontSize = 16.sp)
-                    }
-                }
+//                Button(
+//                    onClick = { },
+//                    colors = ButtonDefaults.buttonColors(
+//                        backgroundColor = Color.White
+//                    ),
+//                    contentPadding = PaddingValues(horizontal = 20.dp, vertical = 10.dp),
+//                    modifier = Modifier.padding(top = 20.dp),
+//                    shape = Shapes.large
+//                ) {
+//                    Row(verticalAlignment = Alignment.CenterVertically) {
+//                        Icon(
+//                            painter = painterResource(id = R.drawable.ic_google),
+//                            contentDescription = "",
+//                            tint = Color.Unspecified,
+//                            modifier = Modifier.size(26.dp)
+//                        )
+//                        Spacer(modifier = Modifier.width(20.dp))
+//                        Text(text = "Continue with Google", color = PrimaryColor, fontSize = 16.sp)
+//                    }
+//                }
 
 
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 20.dp),
+                        .padding(top = 6.dp),
                     backgroundColor = Color.White,
                     elevation = 0.dp,
                     shape = BottomBoxShape.medium
                 ) {
 
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = "Log In with Email",
-//                            fontFamily = Poppins,
-                            fontSize = 12.sp,
-                            modifier = Modifier.padding(top = 16.dp)
-                        )
+//                        Text(
+//                            text = "Log In with Email",
+////                            fontFamily = Poppins,
+//                            fontSize = 12.sp,
+//                            modifier = Modifier.padding(top = 16.dp)
+//                        )
 
                         OutlinedTextField(
                             value = email,
@@ -213,7 +223,7 @@ fun LoginScreen(
 //                            Log.d("TAG2", splashViewModel.isLoading.value.toString())
                             onClick = {
                                 authViewModel.login(email, password)
-                                      },
+                            },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 20.dp)
@@ -233,7 +243,8 @@ fun LoginScreen(
 
                         TextButton(
                             onClick = {
-                                Toast.makeText(mContext, "Feature coming soon", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(mContext, "Feature coming soon", Toast.LENGTH_SHORT)
+                                    .show()
 
                             },
                             contentPadding = PaddingValues(vertical = 0.dp)
@@ -247,7 +258,7 @@ fun LoginScreen(
                         }
                         TextButton(
                             onClick = {
-                                      navController.navigate(route = Screen.RegisterScreen.route)
+                                navController.navigate(route = Screen.RegisterScreen.route)
                             },
                             contentPadding = PaddingValues(vertical = 0.dp)
                         ) {
@@ -262,6 +273,7 @@ fun LoginScreen(
                 }
             }
         }
+    }
     }
 }
 

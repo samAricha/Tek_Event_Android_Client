@@ -181,13 +181,14 @@ fun MainAppScreen() {
         }
         ) {
             Box(modifier = Modifier.padding(bottom = 60.dp)) {
-                val authViewModel: AuthViewModel = hiltViewModel()
-                val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
-                if(!isLoggedInState.value){
-                    RootNavGraph(navController = navHostController, startDestination = AUTH_GRAPH_ROUTE)
-                }else{
-                    MainNavGraph(navController = navHostController)
-                }
+                MainNavGraph(navController = navHostController)
+//                val authViewModel: AuthViewModel = hiltViewModel()
+//                val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
+//                if(!isLoggedInState.value){
+//                    RootNavGraph(navController = navHostController, startDestination = AUTH_GRAPH_ROUTE)
+//                }else{
+//
+//                }
 
             }
         }
