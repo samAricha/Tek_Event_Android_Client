@@ -137,8 +137,8 @@ fun VisitorItem(visitor: EventVisitor, attendeeViewModel: AttendeeViewModel) {
             Column(
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "Name: ${visitor.first_name}")
-                Text(text = "Phone: ${visitor.phone}")
+                Text(text = "Name: ${visitor.first_name ?: ""} ${visitor.second_name ?: ""}")
+                Text(text = "Phone: 0${visitor.phone}")
             }
 
             IconButton(onClick = {
