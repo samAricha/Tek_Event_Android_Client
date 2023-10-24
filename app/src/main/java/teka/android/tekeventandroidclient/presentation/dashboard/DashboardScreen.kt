@@ -51,7 +51,9 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
@@ -100,18 +102,18 @@ fun DashboardScreen(){
         MiniFabItm(
             icon = ImageBitmap.imageResource(id = R.drawable.cloud_download_bitmap),
             label = "Download",
-            identifier = Identifier.Download.name
+            identifier = Identifier.Download.name,
         ),
         MiniFabItm(
             icon = ImageBitmap.imageResource(id = R.drawable.cloud_upload_bitmap),
             label = "Upload",
             identifier = Identifier.Upload.name
         ),
-        MiniFabItm(
-            icon = ImageBitmap.imageResource(id = R.drawable.data_analytics_bitmap),
-            label = "Analytics",
-            identifier = Identifier.Analytics.name
-        )
+//        MiniFabItm(
+//            icon = ImageBitmap.imageResource(id = R.drawable.data_analytics_bitmap),
+//            label = "Analytics",
+//            identifier = Identifier.Analytics.name
+//        )
 
     )
 
@@ -137,21 +139,6 @@ fun DashboardScreen(){
                 items = items,
                 context = LocalContext.current
             )
-
-
-
-//            FloatingActionButton(onClick = {
-//                Toast.makeText(context, "Fetching data...", Toast.LENGTH_SHORT).show()
-//                dashboardViewModel.getRemoteDataAndSaveLocally()
-//            },
-//            backgroundColor = Color.White) {
-//                Icon(
-//                    painter = painterResource(id = R.drawable.cloud_download),
-//                    contentDescription = "Download Contacts",
-//                    modifier = Modifier.size(38.dp),
-//                    tint = PrimaryColor
-//                )
-//            }
         }
 
     ) {
@@ -277,18 +264,20 @@ fun MultiFloatingButton(
             items.forEach{
                 MiniFab(
                     item = it,
-                    onMiniFabItemClick = {minFabItem ->
+                    onMiniFabItemClick = {
+                            minFabItem ->
                                          when(minFabItem.identifier){
                                              Identifier.Download.name -> {
                                                  dashboardViewModel.getRemoteDataAndSaveLocally()
-                                                Toast.makeText(context,"Download", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(context,"Downloading", Toast.LENGTH_SHORT).show()
                                              }
                                              Identifier.Upload.name -> {
-                                                 Toast.makeText(context,"Upload", Toast.LENGTH_SHORT).show()
+                                                 dashboardViewModel.syncRoomDbToRemote()
+                                                 Toast.makeText(context,"Uploading", Toast.LENGTH_SHORT).show()
                                              }
-                                             Identifier.Analytics.name -> {
-                                                 Toast.makeText(context,"Analytics", Toast.LENGTH_SHORT).show()
-                                             }
+//                                             Identifier.Analytics.name -> {
+//                                                 Toast.makeText(context,"Analytics", Toast.LENGTH_SHORT).show()
+//                                             }
                                          }
                     },
                     alpha = alpha,
@@ -310,20 +299,15 @@ fun MultiFloatingButton(
                     }
                 )
             },
+            backgroundColor = PrimaryColor
         ) {
 
             Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Download Contacts",
                     modifier = Modifier.size(28.dp).rotate(rotate),
-                    tint = PrimaryColor,
+                    tint = Color.White,
                 )
-//            Icon(
-//                imageVector = Icons.Default.Add,
-//                contentDescription = null,
-//                modifier = Modifier.rotate(rotate)
-//            )
-
         }
     }
 }
@@ -344,13 +328,14 @@ fun MiniFab(
         if (showLabel) {
             Text(
                 text = item.label,
+                color = PrimaryColor,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .alpha(
                         animateFloatAsState(
                             targetValue = alpha,
-                            animationSpec = tween(50)
+                            animationSpec = tween(50), label = ""
                         ).value
                     )
                     .shadow(textShadow)
@@ -375,7 +360,7 @@ fun MiniFab(
                 )
         ) {
             drawCircle(
-                color = SecondaryColor,
+                color = Color.White,
                 radius = fabScale,
                 center = Offset(
                     center.x + 2f,
@@ -384,24 +369,18 @@ fun MiniFab(
 
             )
 
-            drawCircle(
-                color = SecondaryColor,
-                radius = fabScale
-            )
-
             drawImage(
                 image = item.icon,
                 topLeft = Offset(
                     center.x - (item.icon.width / 2),
                     center.y - (item.icon.width / 2)
                 ),
+                colorFilter = ColorFilter.tint(PrimaryColor),
                 alpha = alpha
 
             )
         }
     }
-    
-
 }
 
 

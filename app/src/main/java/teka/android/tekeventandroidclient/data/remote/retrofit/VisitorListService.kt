@@ -4,6 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import teka.android.tekeventandroidclient.data.remote.models.EventVisitorDto
 import teka.android.tekeventandroidclient.data.room.models.EventVisitor
 import teka.android.tekeventandroidclient.data.room_remote_sync.models.VisitorUpdateResponse
 
@@ -16,8 +17,8 @@ interface VisitorListService {
         @Query("page") page: Int = 1
     ): VisitorListResponse
 
-    @POST("api/eventVisitors/update")
-    suspend fun updateEventVisitorList(@Body eventVisitor: EventVisitor): VisitorUpdateResponse
+    @POST("eventAttendance/save")
+    suspend fun updateEventVisitorList(@Body eventVisitorDto: EventVisitorDto): VisitorUpdateResponse
 
 
 }

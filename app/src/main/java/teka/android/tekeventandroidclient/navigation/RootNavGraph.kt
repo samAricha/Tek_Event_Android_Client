@@ -25,7 +25,8 @@ fun RootNavGraph(
     startDestination: String = To_MAIN_GRAPH_ROUTE
 ) {
     NavHost(navController = navController,
-        startDestination = startDestination,
+//        startDestination = startDestination,
+        startDestination = To_MAIN_GRAPH_ROUTE,
         route = ROOT_GRAPH_ROUTE
     ){
 
@@ -41,7 +42,8 @@ fun RootNavGraph(
                 if (isLoggedInState as Boolean) {
                     MainAppScreen()
                 } else {
-                    LoginScreen(navController)
+//                    LoginScreen(navController)
+                    MainAppScreen()
                 }
             } else {
                 Box(

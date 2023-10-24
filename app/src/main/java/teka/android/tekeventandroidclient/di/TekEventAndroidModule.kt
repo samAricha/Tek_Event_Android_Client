@@ -10,8 +10,10 @@ import dagger.hilt.components.SingletonComponent
 import teka.android.tekeventandroidclient.data.dataStore.DataStoreRepository
 import teka.android.tekeventandroidclient.data.room.EventVisitorDao
 import teka.android.tekeventandroidclient.data.room.TekEventDatabase
+import teka.android.tekeventandroidclient.data.room_remote_sync.RemoteDataUpdater
 import teka.android.tekeventandroidclient.domain.interfaces.SmsSender
 import teka.android.tekeventandroidclient.presentation.splashScreen.SplashViewModel
+import teka.android.tekeventandroidclient.repository.Repository
 import teka.android.tekeventandroidclient.utils.sms_service.AppSmsSender
 import javax.inject.Singleton
 
@@ -43,6 +45,12 @@ object TekEventAndroidModule {
         return appSmsSender
     }
 
+    @Singleton
+    @Provides
+    fun provideRemoteDataUpdater(@ApplicationContext context: Context): RemoteDataUpdater {
+        return RemoteDataUpdater(context)
+    }
+
     @Provides
     @Singleton
     fun provideTekEventDatabase(@ApplicationContext context: Context): TekEventDatabase {
@@ -52,6 +60,18 @@ object TekEventAndroidModule {
     @Provides
     fun provideEventVisitorDao(database: TekEventDatabase): EventVisitorDao {
         return database.eventVisitorDao()
+    }
+
+//    @Provides
+//    @Singleton
+//    fun provideRepository(eventVisitorDao: EventVisitorDao): Repository {
+//        return Repository(eventVisitorDao)
+//    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(database: TekEventDatabase): Repository {
+        return Repository(eventVisitorDao = database.eventVisitorDao())
     }
 
 }

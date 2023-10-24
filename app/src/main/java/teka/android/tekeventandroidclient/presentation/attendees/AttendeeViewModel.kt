@@ -54,7 +54,7 @@ class AttendeeViewModel @Inject constructor(private val eventVisitorDao: EventVi
             val eventVisitor:EventVisitor = eventVisitorDao.getEventVisitorsById(visitorId).first()
             val originalString = eventVisitor.phone
             val trimmedNumber = trimToLastNineDigits(originalString)
-            appSmsSender.sendSms(trimmedNumber, "Hi $capitalizedVisitorName welcome to Coders Club Meeting")
+//            appSmsSender.sendSms(trimmedNumber, "Hi $capitalizedVisitorName welcome to Coders Club Meeting")
         }
     }
 }

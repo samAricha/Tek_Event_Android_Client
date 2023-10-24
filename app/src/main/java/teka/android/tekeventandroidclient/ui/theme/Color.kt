@@ -2,7 +2,7 @@ package teka.android.tekeventandroidclient.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val PrimaryColor = Color(0xFF8062D6)
+val PrimaryColor = Color(0xFFAA8DD9)
 val PrimaryVariant = Color(0x999288F8)
 val SecondaryColor = Color(0xFFFFD2D7)
 val SecondaryVariant = Color(0x99FFD2D7)

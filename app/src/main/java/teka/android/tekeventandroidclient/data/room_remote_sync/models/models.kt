@@ -1,10 +1,9 @@
 package teka.android.tekeventandroidclient.data.room_remote_sync.models
 
-import teka.android.tekeventandroidclient.data.room.models.EventVisitor
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class VisitorUpdateResponse(
-    val success: Boolean,
+    val isSuccessful: Boolean,
     val message: String?,
-    val data: EventVisitor?
 )

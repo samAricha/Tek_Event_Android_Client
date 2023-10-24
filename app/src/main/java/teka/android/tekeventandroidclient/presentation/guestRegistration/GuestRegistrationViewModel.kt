@@ -40,7 +40,7 @@ class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDa
                 val originalString = phoneNumber
                 val trimmedString = trimToLastNineDigits(originalString)
                 val capitalizedVisitorName = guestName.replaceFirstChar { it.uppercaseChar() }
-                appSmsSender.sendSms(trimmedString, "Hi $capitalizedVisitorName welcome to Coders Club Meeting")
+//                appSmsSender.sendSms(trimmedString, "Hi $capitalizedVisitorName welcome to Coders Club Meeting")
             }
         }
 
