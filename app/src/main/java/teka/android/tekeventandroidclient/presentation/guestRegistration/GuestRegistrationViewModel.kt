@@ -33,9 +33,26 @@ class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDa
     var guestName by mutableStateOf("")
 
     fun saveGuest() {
+        // Split the guestName into words using space as the delimiter
+        val words = guestName.split(" ")
+
+        var firstName = ""
+        var secondName = ""
+
+        // Check if there is at least one word
+        if (words.isNotEmpty()) {
+            firstName = words[0]
+        }
+
+        // Check if there is a second word
+        if (words.size >= 2) {
+            secondName = words[1]
+        }
+
+
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val visitor = EventVisitor(first_name =  guestName, phone = phoneNumber)
+                val visitor = EventVisitor(first_name =  firstName, second_name= secondName, phone = phoneNumber)
                 eventVisitorDao.insertVisitor(visitor)
                 val originalString = phoneNumber
                 val trimmedString = trimToLastNineDigits(originalString)

@@ -61,4 +61,17 @@ class SmsViewModel @Inject constructor(private val application: Application, pri
 
     }
 
+
+    fun sendWatsappMessage(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+//               call the service to send the watsapp messages to attendees
+            } catch (e: Exception) {
+                Log.e("MessageSendingError", "Failed to send messages: ${e.message}", e)
+            }
+
+        }
+
+    }
+
 }
