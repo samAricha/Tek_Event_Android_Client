@@ -100,7 +100,6 @@ fun GuestRegistrationScreen(
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 unfocusedBorderColor = PrimaryColor,
                 textColor = PrimaryColor
-
             ),
             keyboardOptions = KeyboardOptions(
                 keyboardType =
@@ -120,28 +119,13 @@ fun GuestRegistrationScreen(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-//        TextField(
-//            value = viewModel.phoneNumber,
-//            onValueChange = { viewModel.phoneNumber = it },
-//            modifier = Modifier.fillMaxWidth(),
-//            label = {
-//                Text(text = "Phone Number")
-//            },
-//            textStyle = TextStyle(color = Color.Black),
-//            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-//            colors = TextFieldDefaults.textFieldColors(
-//                cursorColor = Color.Black,
-//                focusedIndicatorColor = Color.Transparent,
-//                unfocusedIndicatorColor = Color.Transparent
-//            ),
-//            singleLine = true
-//        )
-
 
         OutlinedTextField(
             value = viewModel.phoneNumber,
             onValueChange = {
-                viewModel.phoneNumber = it
+                // Perform input validation to allow only digits, +, -, (, ), and spaces
+                val filteredText = it.replace(Regex("[^0-9+\\-() ]"), "")
+                viewModel.phoneNumber = filteredText
             },
             label = {
                 Text(text = "Phone Number", color = PrimaryColor)
@@ -172,20 +156,6 @@ fun GuestRegistrationScreen(
         )
 
         Spacer(modifier = Modifier.height(30.dp))
-
-
-//        Button(
-//            onClick = { viewModel.saveGuest()
-//                navController.navigate(Screen.AttendeeScreen.route)
-//            }
-//        ) {
-//            Text(
-//                text = "Save Guest",
-//                modifier = Modifier.padding(10.dp),
-//                color = Color.White,
-//                fontSize = 15.sp
-//            )
-//        }
 
 
         Button(

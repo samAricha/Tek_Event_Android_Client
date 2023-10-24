@@ -49,10 +49,13 @@ class GuestRegistrationViewModel  @Inject constructor(private val eventVisitorDa
             secondName = words[1]
         }
 
+        val lastNinePhoneDigits = phoneNumber.takeLast(9)
+
+
 
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val visitor = EventVisitor(first_name =  firstName, second_name= secondName, phone = phoneNumber)
+                val visitor = EventVisitor(first_name =  firstName, second_name= secondName, phone = lastNinePhoneDigits)
                 eventVisitorDao.insertVisitor(visitor)
                 val originalString = phoneNumber
                 val trimmedString = trimToLastNineDigits(originalString)
