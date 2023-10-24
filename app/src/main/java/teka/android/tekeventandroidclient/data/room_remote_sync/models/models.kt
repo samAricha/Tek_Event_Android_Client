@@ -7,3 +7,10 @@ data class VisitorUpdateResponse(
     val isSuccessful: Boolean,
     val message: String?,
 )
+
+@Serializable
+data class WatsappsmsRespnse(
+    val isSuccessful: Boolean,
+    val message: String?,
+)
+

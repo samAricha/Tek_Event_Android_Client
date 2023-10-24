@@ -34,6 +34,10 @@ object RetrofitProvider {
         return provide().create(VisitorListService::class.java)
     }
 
+    fun createWatsappSmsService(): VisitorListService {
+        return provide().create(VisitorListService::class.java)
+    }
+
     fun createAuthService(): AuthService {
         return provide().create(AuthService::class.java)
     }

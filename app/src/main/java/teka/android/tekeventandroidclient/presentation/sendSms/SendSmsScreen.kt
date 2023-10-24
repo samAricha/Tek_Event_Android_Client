@@ -1,5 +1,6 @@
 package teka.android.tekeventandroidclient.presentation.sendSms
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +20,9 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.ui.theme.Poppins
@@ -48,6 +52,11 @@ fun SendSmsScreen(
 ) {
 //    val context = LocalContext.current
     val viewModel: SmsViewModel = hiltViewModel()
+    val coroutineScope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
+
+    val context = LocalContext
+
 
     LazyColumn(
         modifier = Modifier
@@ -105,7 +114,20 @@ fun SendSmsScreen(
 
             Button(
                 onClick = {
-                    viewModel.sendMessage()
+//                    viewModel.sendMessage()
+                    coroutineScope.launch {
+                        val result = viewModel.sendWatsappMessage()
+                        when (result) {
+                            is WatsappSmsResult.Success -> {
+                                scaffoldState.snackbarHostState.showSnackbar(result.message)
+                            }
+                            is WatsappSmsResult.Failure -> {
+
+                                scaffoldState.snackbarHostState.showSnackbar(result.errorMessage)
+
+                            }
+                        }
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
