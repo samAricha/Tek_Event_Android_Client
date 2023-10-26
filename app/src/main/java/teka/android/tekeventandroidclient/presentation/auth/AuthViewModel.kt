@@ -45,9 +45,19 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun register(name: String, email: String, password: String, passwordConfirmation: String) {
+    fun register(
+        name: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ) {
         viewModelScope.launch {
-            val success = authManager.register(name, email, password, passwordConfirmation)
+            val success = authManager.register(
+                name = name,
+                email = email,
+                password = password,
+                passwordConfirmation = passwordConfirmation
+            )
             _isRegistered.value = success
             if (success)dataStoreRepository.saveLoggedInState(isLoggedIn = true)
         }

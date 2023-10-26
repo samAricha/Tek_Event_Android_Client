@@ -77,10 +77,6 @@ fun RegisterScreen(
                 navController.navigate(To_MAIN_GRAPH_ROUTE)
             }
         }
-
-//        onDispose {
-//            job.cancel()
-//        }
     }
 
 
@@ -287,7 +283,12 @@ fun RegisterScreen(
 
                     Button(
                         onClick = {
-                            authViewModel.register(userName, email, password, passwordConfirmation)
+                            authViewModel.register(
+                                name = userName,
+                                email = email,
+                                password = password,
+                                passwordConfirmation = passwordConfirmation
+                            )
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -322,7 +323,11 @@ fun RegisterScreen(
                         )
                     }
                     TextButton(
-                        onClick = { navController.navigate(route = Screen.LoginScreen.route) },
+                        onClick = {
+                            navController.navigate(
+                                route = Screen.LoginScreen.route
+                            )
+                                  },
                         contentPadding = PaddingValues(vertical = 0.dp)
                     ) {
                         Text(

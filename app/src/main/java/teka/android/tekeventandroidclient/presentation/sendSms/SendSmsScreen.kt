@@ -1,5 +1,6 @@
 package teka.android.tekeventandroidclient.presentation.sendSms
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -119,10 +120,11 @@ fun SendSmsScreen(
                         val result = viewModel.sendWatsappMessage()
                         when (result) {
                             is WatsappSmsResult.Success -> {
+                                Log.d("watsapp", result.message)
                                 scaffoldState.snackbarHostState.showSnackbar(result.message)
                             }
                             is WatsappSmsResult.Failure -> {
-
+                                Log.d("watsapp", result.errorMessage)
                                 scaffoldState.snackbarHostState.showSnackbar(result.errorMessage)
 
                             }

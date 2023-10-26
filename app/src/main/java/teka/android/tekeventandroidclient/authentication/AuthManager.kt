@@ -28,8 +28,20 @@ class AuthManager @Inject constructor(
         return false
     }
 
-    suspend fun register(name: String, email: String, password: String, passwordConfirmation: String): Boolean {
-        val response = authService.registration(RegisterRequest(name, email, password, passwordConfirmation))
+    suspend fun register(
+        name: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ): Boolean {
+        val response = authService.registration(
+            RegisterRequest(
+                name = name,
+                email = email,
+                phone = email,
+                password = password,
+                password_confirmation = passwordConfirmation)
+        )
         if (response.isSuccessful) {
             val token = response.data.accessToken
             saveAuthToken(token)
