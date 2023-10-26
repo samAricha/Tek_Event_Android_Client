@@ -59,6 +59,9 @@ fun RegisterScreen(
     navController: NavController,
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
+    val localContext = LocalContext.current
+
+    var phone by remember { mutableStateOf("") }
     var userName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -67,6 +70,21 @@ fun RegisterScreen(
     var isPasswordOpen by remember { mutableStateOf(false) }
     var isPasswordConfirmationOpen by remember { mutableStateOf(false) }
     val mContext = LocalContext.current
+
+    val registrationViewModel : RegistrationViewModel = hiltViewModel()
+
+
+    val isEmailError = registrationViewModel.formState.emailError != null
+    val emailErrorMessage = registrationViewModel.formState.emailError
+
+    val isPhoneNumberError = registrationViewModel.formState.phoneNumberError != null
+    val phoneNumberErrorMessage = registrationViewModel.formState.phoneNumberError
+
+    val isPasswordError = registrationViewModel.formState.passwordError != null
+    val passwordErrorMessage = registrationViewModel.formState.passwordError
+
+    val isPasswordConfirmationError = registrationViewModel.formState.passwordConfirmationError != null
+    val passwordConfirmationErrorMessage = registrationViewModel.formState.passwordConfirmationError
 
 
 
@@ -142,6 +160,39 @@ fun RegisterScreen(
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_person_24),
+                                contentDescription = "",
+                                modifier = Modifier.size(24.dp),
+                                tint = PrimaryColor
+                            )
+                        },
+                        shape = Shapes.large,
+                    )
+
+                    OutlinedTextField(
+                        value = phone,
+                        onValueChange = {
+                            phone = it
+                            registrationViewModel.onEvent(MainEvent.PhoneNumberChanged(it))
+                        },
+                        label = {
+                            Text(text = "Phone", color = PrimaryColor)
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                            .padding(top = 10.dp),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType =
+                            KeyboardType.Phone
+                        ),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            unfocusedBorderColor = PrimaryColor,
+                            textColor = PrimaryColor
+                        ),
+                        singleLine = true,
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.baseline_phone_24),
                                 contentDescription = "",
                                 modifier = Modifier.size(24.dp),
                                 tint = PrimaryColor
@@ -283,12 +334,18 @@ fun RegisterScreen(
 
                     Button(
                         onClick = {
-                            authViewModel.register(
-                                name = userName,
-                                email = email,
-                                password = password,
-                                passwordConfirmation = passwordConfirmation
-                            )
+                            if (!isPhoneNumberError && !isEmailError && !isPasswordError && !isPasswordConfirmationError){
+                                authViewModel.register(
+                                    name = userName,
+                                    email = email,
+                                    password = password,
+                                    passwordConfirmation = passwordConfirmation
+                                )
+                            }else{
+                                Toast.makeText(localContext,"Please fix the errors", Toast.LENGTH_SHORT).show()
+                            }
+
+
                         },
                         modifier = Modifier
                             .fillMaxWidth()
