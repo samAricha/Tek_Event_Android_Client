@@ -1,5 +1,6 @@
 package teka.android.tekeventandroidclient.presentation.settings
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,9 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Shapes
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,26 +46,44 @@ import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.AUTH_GRAPH_ROUTE
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
+import teka.android.tekeventandroidclient.ui.components.CustomDialog
 import teka.android.tekeventandroidclient.ui.theme.BackgroundColor
 import teka.android.tekeventandroidclient.ui.theme.LightPrimaryColor
+import teka.android.tekeventandroidclient.ui.theme.LighterPrimaryVariant
 import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
+import teka.android.tekeventandroidclient.ui.theme.PrimaryVariant
 import teka.android.tekeventandroidclient.ui.theme.SecondaryColor
 import teka.android.tekeventandroidclient.ui.theme.SecondaryVariant
 import teka.android.tekeventandroidclient.ui.theme.Shapes
 import teka.android.tekeventandroidclient.ui.theme.blackColor
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SettingsScreen(navController: NavController = rememberNavController(),
                    authViewModel: AuthViewModel = hiltViewModel()
 ) {
+
+    val showDialog =  remember { mutableStateOf(false) }
+    val authViewModel: AuthViewModel = hiltViewModel()
+
+
+    if(showDialog.value)
+        CustomDialog(value = "", setShowDialog = {
+            showDialog.value = it
+        }) {
+            Log.i("HomePage","HomePage : $it")
+        }
+
+
     LazyColumn() {
         item {
             HeaderText()
-            ProfileCardUI()
-            GeneralOptionsUI()
-            SupportOptionsUI()
-            LogoutOptionsUI(navController = navController, authViewModel = authViewModel)
+            ProfileCardUI(
+                showDialog = showDialog,
+                authViewModel =  authViewModel
+            )
+//            GeneralOptionsUI()
+//            SupportOptionsUI()
+//            LogoutOptionsUI(navController = navController, authViewModel = authViewModel)
         }
 
     }
@@ -71,7 +93,7 @@ fun SettingsScreen(navController: NavController = rememberNavController(),
 @Composable
 fun HeaderText() {
     Text(
-        text = "Settings",
+        text = "Profile",
         color = blackColor,
         textAlign = TextAlign.Center,
         modifier = Modifier
@@ -83,13 +105,16 @@ fun HeaderText() {
 }
 
 @Composable
-fun ProfileCardUI() {
+fun ProfileCardUI(
+    authViewModel: AuthViewModel,
+    showDialog: MutableState<Boolean>
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
             .padding(10.dp),
-        backgroundColor = SecondaryVariant,
+        backgroundColor = LighterPrimaryVariant,
         elevation = 0.dp,
         shape = Shapes.large
     ) {
@@ -98,23 +123,26 @@ fun ProfileCardUI() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column() {
-                Text(
-                    text = "Check Your Profile",
-                    color = blackColor,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                )
+//                Text(
+//                    text = "Check Your Profile",
+//                    color = blackColor,
+//                    fontSize = 16.sp,
+//                    fontWeight = FontWeight.Bold,
+//                )
 
                 Text(
-                    text = "onyiso@gmail.com",
-                    color = Color.Gray,
+                    text = "user@gmail.com",
+                    color = blackColor,
                     fontSize = 10.sp,
                     fontWeight = FontWeight.SemiBold,
                 )
 
                 Button(
                     modifier = Modifier.padding(top = 10.dp),
-                    onClick = {},
+                    onClick = {
+                        showDialog.value = true
+
+                    },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = PrimaryColor
                     ),
@@ -126,10 +154,16 @@ fun ProfileCardUI() {
                     shape = Shapes.medium
                 ) {
                     Text(
-                        text = "View",
+                        text = "Log out",
                         color = BackgroundColor,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_right_arrow),
+                        contentDescription = "",
+                        modifier = Modifier.size(16.dp)
                     )
                 }
             }

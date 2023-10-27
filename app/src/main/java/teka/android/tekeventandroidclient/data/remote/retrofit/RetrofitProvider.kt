@@ -8,14 +8,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 object RetrofitProvider {
-//    private const val TEST_URL = "https://a63a-105-161-198-102.ngrok-free.app/api/"
+    private const val TEST_URL = "https://1004-105-161-198-102.ngrok-free.app/api/"
     private const val BASE_URL = "http://191.101.0.246:8003/api/"
 
     private fun provide(): Retrofit {
         val json = Json { ignoreUnknownKeys = true }//to ignore unkown keys
 
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(TEST_URL)
             .client(provideOkhttpClient())
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()

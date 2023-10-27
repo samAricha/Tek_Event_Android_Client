@@ -1,9 +1,7 @@
 package teka.android.tekeventandroidclient.presentation.auth.login
 
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,19 +23,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import teka.android.tekeventandroidclient.R
 import teka.android.tekeventandroidclient.navigation.Screen
 import teka.android.tekeventandroidclient.navigation.To_MAIN_GRAPH_ROUTE
 import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
 import teka.android.tekeventandroidclient.presentation.auth.UserState
 import teka.android.tekeventandroidclient.ui.theme.*
-import kotlin.coroutines.coroutineContext
+
+
 @Composable
 fun LoginScreen(
     navController: NavController = rememberNavController(),
@@ -45,7 +40,7 @@ fun LoginScreen(
 ) {
     val mContext = LocalContext.current
     Log.d("lscrn", "inside login screen")
-    var email by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isPasswordOpen by remember { mutableStateOf(false) }
     val isLoggedInState = authViewModel.isLoggedIn.collectAsState()
@@ -114,12 +109,12 @@ fun LoginScreen(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
                         OutlinedTextField(
-                            value = email,
+                            value = username,
                             onValueChange = {
-                                email = it
+                                username = it
                             },
                             label = {
-                                Text(text = "Email Address", color = PrimaryColor)
+                                Text(text = "Email / Phone" , color = PrimaryColor)
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -131,8 +126,7 @@ fun LoginScreen(
 
                             ),
                             keyboardOptions = KeyboardOptions(
-                                keyboardType =
-                                KeyboardType.Email
+                                keyboardType = KeyboardType.Text
                             ),
                             singleLine = true,
                             leadingIcon = {
@@ -198,12 +192,10 @@ fun LoginScreen(
                         Button(
 //                            Log.d("TAG2", splashViewModel.isLoading.value.toString())
                             onClick = {
-                                authViewModel.login(email, password)
+                                authViewModel.login(username = username, password = password)
                                 Log.d("LOGIN STATUS: ", "${vm.value}")
                                 Toast.makeText(mContext, "Feature coming soon ${vm.value}", Toast.LENGTH_SHORT)
                                     .show()
-
-
                             },
                             modifier = Modifier
                                 .fillMaxWidth()

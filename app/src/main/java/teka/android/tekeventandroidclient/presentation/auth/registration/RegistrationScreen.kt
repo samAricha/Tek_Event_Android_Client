@@ -18,6 +18,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -199,12 +200,24 @@ fun RegisterScreen(
                             )
                         },
                         shape = Shapes.large,
-                    )
+                        isError = isPhoneNumberError
+                        )
+                    if (isPhoneNumberError) {
+                        if (phoneNumberErrorMessage != null) {
+                            Text(
+                                text = phoneNumberErrorMessage.asString(),
+                                color = MaterialTheme.colors.error,
+                                style = MaterialTheme.typography.body1,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
+                        }
+                    }
 
                     OutlinedTextField(
                         value = email,
                         onValueChange = {
                             email = it
+                            registrationViewModel.onEvent(MainEvent.EmailChanged(it))
                         },
                         label = {
                             Text(text = "Email Address", color = PrimaryColor)
@@ -231,12 +244,24 @@ fun RegisterScreen(
                             )
                         },
                         shape = Shapes.large,
-                    )
+                        isError = isEmailError,
+                        )
+                    if (isEmailError) {
+                        if (emailErrorMessage != null) {
+                            Text(
+                                text = emailErrorMessage.asString(),
+                                color = MaterialTheme.colors.error,
+                                style = MaterialTheme.typography.body1,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
+                        }
+                    }
 
                     OutlinedTextField(
                         value = password,
                         onValueChange = {
                             password = it
+                            registrationViewModel.onEvent(MainEvent.PasswordChanged(it))
                         },
                         label = {
                             Text(text = "Password", color = PrimaryColor)
@@ -280,13 +305,26 @@ fun RegisterScreen(
                             }
                         },
                         shape = Shapes.large,
-                    )
+                        isError = isPasswordError,
+
+                        )
+                    if (isPasswordError) {
+                        if (passwordErrorMessage != null) {
+                            Text(
+                                text = passwordErrorMessage.asString(),
+                                color = MaterialTheme.colors.error,
+                                style = MaterialTheme.typography.body1,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
+                        }
+                    }
 
                     //password confirmation
                     OutlinedTextField(
                         value = passwordConfirmation,
                         onValueChange = {
                             passwordConfirmation = it
+                            registrationViewModel.onEvent(MainEvent.PasswordConfirmationChanged(it))
                         },
                         label = {
                             Text(text = "Confirm Password", color = PrimaryColor)
@@ -329,14 +367,27 @@ fun RegisterScreen(
                                 }
                             }
                         },
+                        isError = isPasswordConfirmationError,
                         shape = Shapes.large,
                     )
+
+                    if (isPasswordConfirmationError) {
+                        if (passwordConfirmationErrorMessage != null) {
+                            Text(
+                                text = passwordConfirmationErrorMessage.asString(),
+                                color = MaterialTheme.colors.error,
+                                style = MaterialTheme.typography.body1,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
+                        }
+                    }
 
                     Button(
                         onClick = {
                             if (!isPhoneNumberError && !isEmailError && !isPasswordError && !isPasswordConfirmationError){
                                 authViewModel.register(
                                     name = userName,
+                                    phone = phone,
                                     email = email,
                                     password = password,
                                     passwordConfirmation = passwordConfirmation

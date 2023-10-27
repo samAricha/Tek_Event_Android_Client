@@ -37,9 +37,9 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun login(email: String, password: String) {
+    fun login(username: String, password: String) {
         viewModelScope.launch {
-            val success = authManager.login(email, password)
+            val success = authManager.login(username, password)
             _isLoggedIn.value = success
             if (success)dataStoreRepository.saveLoggedInState(isLoggedIn = true)
         }
@@ -47,6 +47,7 @@ class AuthViewModel @Inject constructor(
 
     fun register(
         name: String,
+        phone: String,
         email: String,
         password: String,
         passwordConfirmation: String
@@ -54,6 +55,7 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             val success = authManager.register(
                 name = name,
+                phone = phone,
                 email = email,
                 password = password,
                 passwordConfirmation = passwordConfirmation

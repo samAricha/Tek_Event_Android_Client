@@ -50,8 +50,8 @@ fun RootNavGraph(
                 if (isLoggedInState as Boolean) {
                     MainAppScreen()
                 } else {
-//                    LoginScreen(navController)
-                    MainAppScreen()
+                    LoginScreen(navController)
+//                    MainAppScreen()
                 }
             } else {
                 LaunchedEffect(isLoading) {

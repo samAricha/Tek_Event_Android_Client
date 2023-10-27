@@ -62,11 +62,6 @@ object TekEventAndroidModule {
         return database.eventVisitorDao()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideRepository(eventVisitorDao: EventVisitorDao): Repository {
-//        return Repository(eventVisitorDao)
-//    }
 
     @Provides
     @Singleton
