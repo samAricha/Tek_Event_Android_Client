@@ -6,11 +6,10 @@
         <item name="android:fontFamily">@font/reemkufi</item>
     </style>
 
-    <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/calendar_55</item>
+    <style name="Theme.CustomSplashScreenTheme" parent="Theme.TekEventAndroidClient">
+        <item name="windowSplashScreenBackground">@color/tek_event_purple_variant</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/welcome55</item>
         <item name="windowSplashScreenAnimationDuration">600</item>
-        <item name="android:fontFamily">@font/reemkufi</item>
 
         <item name="postSplashScreenTheme">@style/Theme.TekEventAndroidClient</item>
     </style>
