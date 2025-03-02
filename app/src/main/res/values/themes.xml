@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.TekEventAndroidClient" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.TekEventAndroidClient" parent="android:Theme.Material.Light.NoActionBar" >
+        <item name="android:statusBarColor">@color/tek_event_purple</item>
+        <item name="android:fontFamily">@font/reemkufi</item>
+    </style>
+
+    <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/calendar_55</item>
+        <item name="windowSplashScreenAnimationDuration">600</item>
+        <item name="android:fontFamily">@font/reemkufi</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.TekEventAndroidClient</item>
+    </style>
 </resources>
