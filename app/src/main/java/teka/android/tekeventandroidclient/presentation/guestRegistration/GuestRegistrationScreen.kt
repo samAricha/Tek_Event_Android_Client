@@ -4,9 +4,14 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Shapes
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,67 +22,160 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import teka.android.tekeventandroidclient.R
+import teka.android.tekeventandroidclient.navigation.Screen
+import teka.android.tekeventandroidclient.presentation.sendSms.SmsViewModel
+import teka.android.tekeventandroidclient.ui.theme.Poppins
+import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
+import teka.android.tekeventandroidclient.ui.theme.Shapes
+import teka.android.tekeventandroidclient.ui.theme.buttonShapes
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun GuestRegistrationScreen() {
+fun GuestRegistrationScreen(
+    navController: NavHostController
+) {
+
+    val viewModel: GuestRegistrationViewModel = hiltViewModel()
     val guestNameState = mutableStateOf("")
     val phoneNumberState = mutableStateOf("")
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(start = 8.dp, end = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+//        verticalArrangement = Arrangement.Center
     ) {
         // Organization Logo
         Image(
-            painter = painterResource(id = R.drawable.teka),
+            painter = painterResource(id = R.drawable.record),
             contentDescription = "Organization Logo",
             modifier = Modifier
-                .size(200.dp)
-                .padding(bottom = 16.dp),
+                .size(250.dp)
+                .padding(bottom = 16.dp, top = 16.dp),
             contentScale = ContentScale.Fit
         )
 
-        // Guest Name TextField
-        TextField(
-            value = guestNameState.value,
-            onValueChange = { guestNameState.value = it },
+        Spacer(modifier = Modifier.height(30.dp))
+
+//        TextField(
+//            value = viewModel.guestName,
+//            onValueChange = { viewModel.guestName = it },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 16.dp),
+//            label = {
+//                Text(text = "Guest Name")
+//            },
+//            textStyle = TextStyle(color = Color.Black),
+//            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+//            colors = TextFieldDefaults.textFieldColors(
+//                cursorColor = Color.Black,
+//                focusedIndicatorColor = Color.Transparent,
+//                unfocusedIndicatorColor = Color.Transparent
+//            ),
+//            singleLine = true
+//        )
+
+
+
+
+        OutlinedTextField(
+            value = viewModel.guestName,
+            onValueChange = {
+                viewModel.guestName = it
+            },
+            label = {
+                Text(text = "Guest Name", color = PrimaryColor)
+            },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp),
-            label = {
-                Text(text = "Guest Name")
+                .padding(horizontal = 20.dp)
+                .padding(top = 10.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = PrimaryColor,
+                textColor = PrimaryColor
+            ),
+            keyboardOptions = KeyboardOptions(
+                keyboardType =
+                KeyboardType.Text
+            ),
+            singleLine = true,
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_person_24),
+                    contentDescription = "",
+                    tint = PrimaryColor,
+                    modifier = Modifier.size(24.dp)
+                )
             },
-            textStyle = TextStyle(color = Color.Black),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.LightGray,
-                cursorColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            )
+            shape = Shapes.large,
         )
 
-        // Phone Number TextField
-        TextField(
-            value = phoneNumberState.value,
-            onValueChange = { phoneNumberState.value = it },
-            modifier = Modifier.fillMaxWidth(),
-            label = {
-                Text(text = "Phone Number")
+        Spacer(modifier = Modifier.height(20.dp))
+
+
+        OutlinedTextField(
+            value = viewModel.phoneNumber,
+            onValueChange = {
+                // Perform input validation to allow only digits, +, -, (, ), and spaces
+                val filteredText = it.replace(Regex("[^0-9+\\-() ]"), "")
+                viewModel.phoneNumber = filteredText
             },
-            textStyle = TextStyle(color = Color.Black),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.LightGray,
-                cursorColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            )
+            label = {
+                Text(text = "Phone Number", color = PrimaryColor)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .padding(top = 10.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = PrimaryColor,
+                textColor = PrimaryColor
+
+            ),
+            keyboardOptions = KeyboardOptions(
+                keyboardType =
+                KeyboardType.Phone
+            ),
+            singleLine = true,
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_phone_24),
+                    contentDescription = "",
+                    tint = PrimaryColor,
+                    modifier = Modifier.size(24.dp)
+                )
+            },
+            shape = Shapes.large,
         )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+
+        Button(
+            onClick = {
+                viewModel.saveGuest()
+                navController.navigate(Screen.AttendeeScreen.route)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .padding(top = 20.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = PrimaryColor,
+                contentColor = Color.White
+            ),
+            contentPadding = PaddingValues(vertical = 14.dp),
+            shape = buttonShapes.large,
+        ) {
+            Text(text = "Save Guest", fontFamily = Poppins)
+
+        }
     }
 }

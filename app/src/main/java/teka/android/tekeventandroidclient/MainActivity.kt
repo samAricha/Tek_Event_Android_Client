@@ -1,33 +1,68 @@
 package teka.android.tekeventandroidclient
 
+
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.toArgb
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
-import teka.android.tekeventandroidclient.presentation.guestRegistration.GuestRegistrationScreen
+import teka.android.tekeventandroidclient.navigation.RootNavGraph
+import teka.android.tekeventandroidclient.presentation.auth.AuthViewModel
+import teka.android.tekeventandroidclient.presentation.auth.UserState
+import teka.android.tekeventandroidclient.presentation.splashScreen.SplashViewModel
+import teka.android.tekeventandroidclient.ui.theme.PrimaryColor
 import teka.android.tekeventandroidclient.ui.theme.TekEventAndroidClientTheme
+import javax.inject.Inject
 
+@ExperimentalAnimationApi
+@ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var splashViewModel: SplashViewModel
+
+    private val userState by viewModels<AuthViewModel>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.statusBarColor = PrimaryColor.toArgb()
+
+        installSplashScreen().setKeepOnScreenCondition {
+            Log.d("TAG2", splashViewModel.isLoading.value.toString())
+            !splashViewModel.isLoading.value
+        }
+
+
         super.onCreate(savedInstanceState)
+
         setContent {
-            TekEventAndroidClientTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    GuestRegistrationScreen()
+            CompositionLocalProvider(UserState provides userState) {
+                TekEventAndroidClientTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colors.background
+                    ) {
+                        val startDestination by splashViewModel.startDestination
+                        startDestination?.let {
+                            RootNavGraph(navController = rememberNavController(),
+                                startDestination = it)
+                        }
+                    }
                 }
             }
+
         }
     }
 }
