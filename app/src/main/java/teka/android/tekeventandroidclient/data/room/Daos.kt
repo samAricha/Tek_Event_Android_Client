@@ -13,10 +13,10 @@ interface EventVisitorDao{
     suspend fun insertVisitors(eventVisitors: List<EventVisitor>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(eventVisitor: EventVisitor)
+    suspend fun update(eventVisitor: EventVisitor):Int
 
     @Delete
-    suspend fun delete(eventVisitor: EventVisitor)
+    suspend fun delete(eventVisitor: EventVisitor):Int
 
     @Query("SELECT * FROM event_visitors")
     fun getAllEventVisitors(): Flow<List<EventVisitor>>
@@ -25,6 +25,6 @@ interface EventVisitorDao{
     fun getEventVisitorsById(visitorId:Int): Flow<EventVisitor>
 
     @Query("UPDATE event_visitors SET attended = NOT attended WHERE event_visitor_id = :visitorId")
-    suspend fun toggleArrival(visitorId: Int)
+    suspend fun toggleArrival(visitorId: Int): Int
 
 }
